@@ -4,5 +4,6 @@
 # Firebase temporary files created by the CLI
 .firebase
 # Firebase config and log
-firebase-config.js
+# Your real Firebase config file
+/Public/firebase-config.js
 firebase-debug.log
