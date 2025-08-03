@@ -5,5 +5,5 @@
 .firebase
 # Firebase config and log
 # Your real Firebase config file
-/Public/firebase-config.js
+
 firebase-debug.log
