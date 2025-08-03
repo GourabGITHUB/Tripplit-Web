@@ -24,7 +24,7 @@ function showCustomDialog(message, buttons) {
         dialogOverlay.classList.remove("hidden");
     });
 }
-import { db } from '../firebase-config.js';
+import { db } from 'firebase-config.js';
 import {
     doc,
     updateDoc,
