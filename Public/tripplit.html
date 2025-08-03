@@ -301,7 +301,14 @@ await sleep(2000);
     
     // Import the necessary Firestore functions from the modular SDK
     import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    import { getAppCheck, onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     
+const app = getApp();
+const appCheck = getAppCheck(app);
+
+let initialWriteDone = false;
 
     function generateShortId(length = 6) {
       const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -489,8 +496,18 @@ async function saveSysdetailstoFB() {
   }
 }
 
-saveSysdetailstoFB();
+onTokenChanged(appCheck, (token) => {
+  if (token && !initialWriteDone) {
+    // This code will run as soon as the first valid token is available
+    console.log("App Check token is ready. Starting initial database writes.");
+    
+    // Call your initial write function here
+    saveSysdetailstoFB(); 
 
+    // Set the flag to prevent it from running again on token refresh
+    initialWriteDone = true;
+  }
+});
   </script>
 </body>
 </html>
