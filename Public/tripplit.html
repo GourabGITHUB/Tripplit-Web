@@ -296,68 +296,71 @@ await sleep(2000);
 
 
     // Import 'db' from your config file
-    // Note: The path is now relative to your HTML file
-    import { db, appCheck } from './firebase-config.js';
-    
-    // Import the necessary Firestore functions from the modular SDK
-    import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+// Import 'db' and 'appCheck' from your config file
+import { db, appCheck } from './firebase-config.js';
+    
+// Import the necessary Firestore functions and the onTokenChanged listener
+import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
 
-    import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
-    import { getToken } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
+// A flag to track if App Check is ready
+let isAppCheckReady = false;
 
-    
-let initialWriteDone = false;
+// Listen for the App Check token to become available
+onTokenChanged(appCheck, (token) => {
+  if (token) {
+    console.log("App Check token is ready. Enabling database functions.");
+    isAppCheckReady = true;
 
-async function withAppCheck(fn) {
-  try {
-    // Get a valid App Check token
-    await getToken(appCheck, true); 
-    // Now that we have a valid token, run the original function
-    await fn();
-  } catch (error) {
-    console.error("App Check token not available. Database operation failed.", error);
-    showCustomDialog("An error occurred. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+    // Run the initial write only once
+    if (!localStorage.getItem('visitor')) {
+      saveSysdetailstoFB();
+    }
   }
+});
+
+function generateShortId(length = 6) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
 }
 
-    function generateShortId(length = 6) {
-      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      let result = '';
-      for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return result;
+// This is your updated startTrip function
+async function startTrip() {
+    // Check if App Check is ready before proceeding
+    if (!isAppCheckReady) {
+        showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
+        return;
+    }
+    
+    const tripName = await showInputPrompt("Enter a name for your trip:", "");
+    if (!tripName || tripName.trim() === "") {
+        showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
+        return;
     }
 
-    // This is your updated startTrip function
-async function startTrip() {
-  const tripName = await showInputPrompt("Enter a name for your trip:", "");
-  if (!tripName || tripName.trim() === "") {
-    showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
-    return;
-  }
+    const tripId = generateShortId();
+    const newTrip = {
+        name: tripName.trim(),
+        participants: [],
+        expenses: [],
+        // Use a native Date object instead of an ISO string
+        createdAt: new Date()
+    };
 
-  const tripId = generateShortId();
-  const newTrip = {
-    // Remove the 'id' field as it's redundant
-    name: tripName.trim(),
-    participants: [],
-    expenses: [],
-    createdAt: new Date().toISOString()
-  };
-
-  try {
-    // Wrap the setDoc call in the App Check handler
-    await withAppCheck(async () => {
-      await setDoc(doc(db, "trips", tripId), newTrip);
-      console.log("Trip saved to Firestore:", newTrip);
-      showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
-      window.location.href = `your_tripplit.html?id=${tripId}`;
-    });
-  } catch(error) {
-    console.error("Error saving trip:", error);
-    showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
-  }
+    try {
+        console.log("Attempting to save trip:", newTrip);
+        await setDoc(doc(db, "trips", tripId), newTrip);
+        console.log("Trip saved to Firestore:", newTrip);
+        await showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
+        window.location.href = `your_tripplit.html?id=${tripId}`;
+    } catch(error) {
+        console.error("Error saving trip:", error);
+        showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+    }
 }
 
 function showCustomDialog(message, buttons) {
@@ -384,7 +387,7 @@ function showCustomDialog(message, buttons) {
         dialogOverlay.classList.remove("hidden");
     });
 }
-// Add this to your JavaScript file
+
 function showInputPrompt(message, defaultValue = '', placeholder = '') {
     return new Promise((resolve) => {
         const dialogOverlay = document.getElementById("custom-dialog-overlay");
@@ -429,74 +432,71 @@ function showInputPrompt(message, defaultValue = '', placeholder = '') {
 
 // This is your updated loadTrip function
 async function loadTrip() {
-  const savedTrip = await showInputPrompt("Enter unique trip ID:");
-  if (!savedTrip) return;
-
-  // Wrap the getDoc call in the App Check handler
-  await withAppCheck(async () => {
-    const docRef = doc(db, "trips", savedTrip);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
-      window.location.href = `your_tripplit.html?id=${savedTrip}`;
-    } else {
-      console.log("No such document!");
-      showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
-    }
-  });
-}    
-    // Add event listeners using JavaScript instead of onclick attributes
-    document.getElementById('createTripBtn').addEventListener('click', startTrip);
-    document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
-
-    function getSysdetails() {
-        // body...
-        const userAgent = navigator.userAgent;
-        const platform = navigator.platform;
-
-        return{
-            userAgent,
-            platform,
-            timestamp: new Date().toISOString()
-        };
+    if (!isAppCheckReady) {
+        showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
+        return;
     }
 
-async function saveSysdetailstoFB() {
-  const alreadyVisited = localStorage.getItem('visitor');
+    const savedTrip = await showInputPrompt("Enter unique trip ID:");
+    if (!savedTrip) return;
 
-  if (alreadyVisited) {
-    console.log("Visitor has already visited. Skipping Firestore save.");
-    return;
-  }
+    try {
+        const docRef = doc(db, "trips", savedTrip);
+        const docSnap = await getDoc(docRef);
 
-  const sysDetails = getSysdetails(); // assuming this returns an object
-  const visitorid = generateShortId();
+        if (docSnap.exists()) {
+            await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
+            window.location.href = `your_tripplit.html?id=${savedTrip}`;
+        } else {
+            console.log("No such document!");
+            showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
+        }
+    } catch (error) {
+        console.error("Error loading trip:", error);
+        showCustomDialog("Failed to load trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+    }
+} 
+    
+// Add event listeners using JavaScript instead of onclick attributes
+document.getElementById('createTripBtn').addEventListener('click', startTrip);
+document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
 
-  // Save visitor ID to localStorage
-  localStorage.setItem('visitor', JSON.stringify(visitorid));
+function getSysdetails() {
+    const userAgent = navigator.userAgent;
+    const platform = navigator.platform;
 
-  try {
-    const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
-    console.log("Sys info saved with ID:", docRef.id);
-  } catch (e) {
-    console.error("Failed to save system details:", e);
-  }
+    return{
+        userAgent,
+        platform,
+        timestamp: new Date()
+    };
 }
 
-onTokenChanged(appCheck, (token) => {
-  if (token && !initialWriteDone) {
-    // This code will run as soon as the first valid token is available
-    console.log("App Check token is ready. Starting initial database writes.");
-    
-    // Call your initial write function here
+async function saveSysdetailstoFB() {
+    if (!isAppCheckReady) {
+        console.error("App Check is not ready for initial write.");
+        return;
+    }
 
-    saveSysdetailstoFB(); 
+    const alreadyVisited = localStorage.getItem('visitor');
+    if (alreadyVisited) {
+        console.log("Visitor has already visited. Skipping Firestore save.");
+        return;
+    }
 
-    // Set the flag to prevent it from running again on token refresh
-    initialWriteDone = true;
-  }
-});
+    const sysDetails = getSysdetails();
+    const visitorid = generateShortId();
+
+    localStorage.setItem('visitor', JSON.stringify(visitorid));
+
+    try {
+        console.log("Attempting to save sysDetails:", sysDetails);
+        const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
+        console.log("Sys info saved with ID:", docRef.id);
+    } catch (e) {
+        console.error("Failed to save system details:", e);
+    }
+}
   </script>
 </body>
 </html>
