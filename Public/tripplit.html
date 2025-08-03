@@ -303,8 +303,22 @@ await sleep(2000);
     import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
+    import { getToken } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
+
     
 let initialWriteDone = false;
+
+async function withAppCheck(fn) {
+  try {
+    // Get a valid App Check token
+    await getToken(appCheck, true); 
+    // Now that we have a valid token, run the original function
+    await fn();
+  } catch (error) {
+    console.error("App Check token not available. Database operation failed.", error);
+    showCustomDialog("An error occurred. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+  }
+}
 
     function generateShortId(length = 6) {
       const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -317,49 +331,35 @@ let initialWriteDone = false;
 
     // This is your updated startTrip function
 async function startTrip() {
-    // ✅ REPLACED: Native prompt() with custom input dialog
-    const tripName = await showInputPrompt("Enter a name for your trip:", "");
+  const tripName = await showInputPrompt("Enter a name for your trip:", "");
+  if (!tripName || tripName.trim() === "") {
+    showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
+    return;
+  }
 
-    if (!tripName || tripName.trim() === "") {
-        // ✅ REPLACED: Native alert() with custom dialog
-        showCustomDialog(
-            "Trip name is required.",
-            [{ text: "OK", className: "secondary", value: true }]
-        );
-        return;
-    }
+  const tripId = generateShortId();
+  const newTrip = {
+    // Remove the 'id' field as it's redundant
+    name: tripName.trim(),
+    participants: [],
+    expenses: [],
+    createdAt: new Date().toISOString()
+  };
 
-    const tripId = generateShortId();
-    const newTrip = {
-        id: tripId,
-        name: tripName.trim(),
-        participants: [],
-        expenses: [],
-        createdAt: new Date().toISOString()
-    };
-
-    console.log("trip data:", newTrip);
-
-    try {
-        await setDoc(doc(db, "trips", tripId), newTrip);
-        console.log("Trip saved to Firestore:", newTrip);
-        
-        // Use custom dialog before redirecting for a consistent message
-        await showCustomDialog(
-            `Trip "${tripName}" created with ID: ${tripId}. Redirecting...`,
-            [{ text: "OK", className: "secondary", value: true }]
-        );
-        
-        window.location.href = `your_tripplit.html?id=${tripId}`;
-    } catch(error) {
-        console.error("Error saving trip:", error);
-        // ✅ REPLACED: Native alert() with custom dialog
-        showCustomDialog(
-            "Failed to create trip. Please try again.",
-            [{ text: "OK", className: "secondary", value: true }]
-        );
-    }
+  try {
+    // Wrap the setDoc call in the App Check handler
+    await withAppCheck(async () => {
+      await setDoc(doc(db, "trips", tripId), newTrip);
+      console.log("Trip saved to Firestore:", newTrip);
+      showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
+      window.location.href = `your_tripplit.html?id=${tripId}`;
+    });
+  } catch(error) {
+    console.error("Error saving trip:", error);
+    showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+  }
 }
+
 function showCustomDialog(message, buttons) {
     return new Promise((resolve) => {
         const dialogOverlay = document.getElementById("custom-dialog-overlay");
@@ -429,31 +429,23 @@ function showInputPrompt(message, defaultValue = '', placeholder = '') {
 
 // This is your updated loadTrip function
 async function loadTrip() {
-    // ✅ REPLACED: Native prompt() with custom input dialog
-    const savedTrip = await showInputPrompt("Enter unique trip ID:");
-    if (!savedTrip) return; // User clicked cancel
+  const savedTrip = await showInputPrompt("Enter unique trip ID:");
+  if (!savedTrip) return;
 
+  // Wrap the getDoc call in the App Check handler
+  await withAppCheck(async () => {
     const docRef = doc(db, "trips", savedTrip);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        // ✅ REPLACED: Native alert() with custom dialog
-        await showCustomDialog(
-            "Trip found! Redirecting to trip...",
-            [{ text: "OK", className: "secondary", value: true }]
-        );
-        window.location.href = `your_tripplit.html?id=${savedTrip}`;
+      await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
+      window.location.href = `your_tripplit.html?id=${savedTrip}`;
     } else {
-        console.log("No such document!");
-        // ✅ REPLACED: Native alert() with custom dialog
-        showCustomDialog(
-            "Oops! Trip ID does not exist.",
-            [{ text: "OK", className: "secondary", value: true }]
-        );
-        return false;
+      console.log("No such document!");
+      showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
     }
-}
-    
+  });
+}    
     // Add event listeners using JavaScript instead of onclick attributes
     document.getElementById('createTripBtn').addEventListener('click', startTrip);
     document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
