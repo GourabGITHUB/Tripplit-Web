@@ -1,0 +1,8 @@
+# Dependency directory
+/node_modules
+
+# Firebase temporary files created by the CLI
+.firebase
+# Firebase config and log
+firebase-config.js
+firebase-debug.log

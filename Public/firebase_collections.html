@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firebase GetDoc Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    #data-container {
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Fetch Document from Firebase</h1>
+  <input type="text" id="docId" placeholder="Enter Document ID" />
+  <button id="fetchBtn">Fetch Document</button>
+  
+  <div id="data-container"></div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+     import { db } from '../firebase-config.js';
+    
+    // Import the necessary Firestore functions from the modular SDK
+    import { doc, setDoc, getDocs, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const fetchBtn = document.getElementById('fetchBtn');
+const dataContainer = document.getElementById('data-container');
+
+fetchBtn.addEventListener('click', async () => {
+  try {
+    const collection_name = document.getElementById('docId').value;
+
+    const colRef = collection(db, collection_name); // ← Replace with your collection name
+    const querySnapshot = await getDocs(colRef);
+
+    if (querySnapshot.empty) {
+      dataContainer.innerText = "No documents found.";
+      return;
+    }
+
+    let output = "<h3>Collection Data:</h3><ul>";
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+      output += `<li><strong>${doc.id}:</strong> <pre>${JSON.stringify(data, null, 2)}</pre></li>`;
+    });
+    output += "</ul>";
+    dataContainer.innerHTML = output;
+
+  } catch (error) {
+    console.error("Error fetching collection:", error);
+    dataContainer.innerText = "Error fetching collection.";
+  }
+});
+
+  </script>
+
+
+</body>
+</html>

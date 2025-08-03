@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripSplit - Shared Trip Expenses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Full-screen loader */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #F8FAFC;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* Spinner styling */
+#loader::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 5px solid #abede3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+
+      background-color: #57dbc7 ;
+
+}
+
+/* Spinner animation */
+@keyframes spin {
+    0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+    /* ... your CSS here (no changes) ... */
+/* General & Body Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+body {
+    background: #F0F2F5;
+    background: linear-gradient(
+        180deg,
+        #F8FAFC 0%,
+        #F0F2F5 100%
+    );
+    color: #111827;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header & Logo */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo-link {
+    display: block;
+}
+.logo {
+    height: 200px;
+    width: auto;
+}
+.heading-wrapper {
+    text-align: center;
+    padding: 0 1.5rem;
+}
+.heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+}span {
+    text-transform: capitalize;
+}
+.start {
+    color: red;
+    font-weight: bolder;
+}
+.end {
+    color: limegreen;
+    font-weight: bolder;
+}
+
+/* Card & Buttons */
+.card {
+    background: #F8F8F8;
+    background: linear-gradient(
+        135deg,
+        #FFFFFF 0%,
+        #F8F8F8 60%,
+        #EAEAEA 100%
+    );
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+.card button {
+    background: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    margin-top: 1rem;
+    width: 100%;
+}
+.card button:hover {
+    background: #2563eb;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .card {
+        padding: 1.5rem;
+    }
+    .card button {
+        font-size: 0.95rem;
+        padding: 0.65rem 1rem;
+    }
+    
+}
+@media (max-width: 768px) {
+    .logo {
+        height: 80px;
+    }
+    .heading {
+        font-size: 0.8rem;
+    }
+    .loader-image {
+    /* Reduce the size of the image on smaller screens */
+    height: 80px;
+  }
+}
+
+/* Custom Dialog Styles (already correctly centered) */
+#custom-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 26, 46, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+#custom-dialog-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+#custom-dialog {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+#dialog-message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+#dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+#dialog-buttons button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600;
+}
+#dialog-buttons button.secondary {
+    background-color: #ecf0f1;
+    color: var(--text-color);
+}
+#dialog-buttons button.secondary:hover {
+    background-color: #bdc3c7;
+}
+#dialog-buttons button.primary {
+    background-color: #3461eb;
+    color: #ffffff;
+}
+#dialog-buttons button.primary:hover {
+    background-color: #d64032;
+}
+#dialog-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+#dialog-input.hidden {
+    display: none;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+  </style>
+</head>
+<body>
+
+    <div id="loader"> <img src="../Images/logonobg.png" alt="Trip Expense Tracker Logo" class="loader-image"></div>
+
+  <header>
+<a href=" " class="logo-link">
+      <img src="../Images/logonobg.png" alt="Trip Expense Tracker Logo" class="logo">
+    </a>
+  </header>
+  <div> 
+<p class="heading"> <span class="start"> Effortless</span> expense sharing for your next <span class="end"> adventure. </span></p>
+</div>
+
+  <div class="card">
+    <h2>Manage Your Trips</h2>
+    <p style="margin: 1rem 0; color: #6b7280;">Create a new trip or access an existing one</p>
+    <button id="createTripBtn">Create Trip</button>
+    <button id="loadTripBtn">Load Existing Trip</button>
+
+  </div>
+  <div id="custom-dialog-overlay" class="hidden">
+    <div id="custom-dialog">
+        <p id="dialog-message"></p>
+        <input type="text" id="dialog-input" class="hidden" placeholder="Enter amount">
+        <div id="dialog-buttons">
+            </div>
+    </div>
+</div>
+<script> 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+window.addEventListener("load", async function () {
+  const loader = document.getElementById("loader");
+  const content = document.getElementById("content");
+await sleep(2000);
+  loader.style.display = "none";    // hide loader
+});
+</script>
+  <script type="module">
+
+
+    // Import 'db' from your config file
+    // Note: The path is now relative to your HTML file
+    import { db } from '../firebase-config.js';
+    
+    // Import the necessary Firestore functions from the modular SDK
+    import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    
+
+    function generateShortId(length = 6) {
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    // This is your updated startTrip function
+async function startTrip() {
+    // ✅ REPLACED: Native prompt() with custom input dialog
+    const tripName = await showInputPrompt("Enter a name for your trip:", "");
+
+    if (!tripName || tripName.trim() === "") {
+        // ✅ REPLACED: Native alert() with custom dialog
+        showCustomDialog(
+            "Trip name is required.",
+            [{ text: "OK", className: "secondary", value: true }]
+        );
+        return;
+    }
+
+    const tripId = generateShortId();
+    const newTrip = {
+        id: tripId,
+        name: tripName.trim(),
+        participants: [],
+        expenses: [],
+        createdAt: new Date().toISOString()
+    };
+
+    console.log("trip data:", newTrip);
+
+    try {
+        await setDoc(doc(db, "trips", tripId), newTrip);
+        console.log("Trip saved to Firestore:", newTrip);
+        
+        // Use custom dialog before redirecting for a consistent message
+        await showCustomDialog(
+            `Trip "${tripName}" created with ID: ${tripId}. Redirecting...`,
+            [{ text: "OK", className: "secondary", value: true }]
+        );
+        
+        window.location.href = `your_tripplit.html?id=${tripId}`;
+    } catch(error) {
+        console.error("Error saving trip:", error);
+        // ✅ REPLACED: Native alert() with custom dialog
+        showCustomDialog(
+            "Failed to create trip. Please try again.",
+            [{ text: "OK", className: "secondary", value: true }]
+        );
+    }
+}
+function showCustomDialog(message, buttons) {
+    return new Promise((resolve) => {
+        const dialogOverlay = document.getElementById("custom-dialog-overlay");
+        const dialogMessage = document.getElementById("dialog-message");
+        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+
+        dialogMessage.textContent = message;
+        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+
+        buttons.forEach(btnConfig => {
+            const button = document.createElement("button");
+            button.textContent = btnConfig.text;
+            button.className = btnConfig.className;
+            button.addEventListener("click", () => {
+                dialogOverlay.classList.add("hidden");
+                resolve(btnConfig.value);
+            });
+            dialogButtonsContainer.appendChild(button);
+        });
+
+        // Show the dialog
+        dialogOverlay.classList.remove("hidden");
+    });
+}
+// Add this to your JavaScript file
+function showInputPrompt(message, defaultValue = '', placeholder = '') {
+    return new Promise((resolve) => {
+        const dialogOverlay = document.getElementById("custom-dialog-overlay");
+        const dialogMessage = document.getElementById("dialog-message");
+        const dialogInput = document.getElementById("dialog-input");
+        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+
+        dialogMessage.textContent = message;
+        dialogInput.value = defaultValue;
+        dialogInput.placeholder = placeholder;
+        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+
+        // Show the input field
+        dialogInput.classList.remove("hidden");
+
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
+        cancelButton.className = "secondary";
+        cancelButton.addEventListener("click", () => {
+            dialogInput.classList.add("hidden"); // Hide input
+            dialogOverlay.classList.add("hidden");
+            resolve(null); // Resolve with null on cancel
+        });
+
+        const okButton = document.createElement("button");
+        okButton.textContent = "OK";
+        okButton.className = "primary";
+        okButton.addEventListener("click", () => {
+            dialogInput.classList.add("hidden"); // Hide input
+            dialogOverlay.classList.add("hidden");
+            resolve(dialogInput.value); // Resolve with the input value
+        });
+
+        dialogButtonsContainer.appendChild(cancelButton);
+        dialogButtonsContainer.appendChild(okButton);
+
+        // Show the dialog
+        dialogOverlay.classList.remove("hidden");
+        dialogInput.focus(); // Focus on the input for a better UX
+    });
+}
+
+// This is your updated loadTrip function
+async function loadTrip() {
+    // ✅ REPLACED: Native prompt() with custom input dialog
+    const savedTrip = await showInputPrompt("Enter unique trip ID:");
+    if (!savedTrip) return; // User clicked cancel
+
+    const docRef = doc(db, "trips", savedTrip);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        // ✅ REPLACED: Native alert() with custom dialog
+        await showCustomDialog(
+            "Trip found! Redirecting to trip...",
+            [{ text: "OK", className: "secondary", value: true }]
+        );
+        window.location.href = `your_tripplit.html?id=${savedTrip}`;
+    } else {
+        console.log("No such document!");
+        // ✅ REPLACED: Native alert() with custom dialog
+        showCustomDialog(
+            "Oops! Trip ID does not exist.",
+            [{ text: "OK", className: "secondary", value: true }]
+        );
+        return false;
+    }
+}
+    
+    // Add event listeners using JavaScript instead of onclick attributes
+    document.getElementById('createTripBtn').addEventListener('click', startTrip);
+    document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
+
+    function getSysdetails() {
+        // body...
+        const userAgent = navigator.userAgent;
+        const platform = navigator.platform;
+
+        return{
+            userAgent,
+            platform,
+            timestamp: new Date().toISOString()
+        };
+    }
+
+async function saveSysdetailstoFB() {
+  const alreadyVisited = localStorage.getItem('visitor');
+
+  if (alreadyVisited) {
+    console.log("Visitor has already visited. Skipping Firestore save.");
+    return;
+  }
+
+  const sysDetails = getSysdetails(); // assuming this returns an object
+  const visitorid = generateShortId();
+
+  // Save visitor ID to localStorage
+  localStorage.setItem('visitor', JSON.stringify(visitorid));
+
+  try {
+    const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
+    console.log("Sys info saved with ID:", docRef.id);
+  } catch (e) {
+    console.error("Failed to save system details:", e);
+  }
+}
+
+saveSysdetailstoFB();
+
+  </script>
+</body>
+</html>
