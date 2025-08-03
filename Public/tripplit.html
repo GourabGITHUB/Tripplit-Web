@@ -297,17 +297,13 @@ await sleep(2000);
 
     // Import 'db' from your config file
     // Note: The path is now relative to your HTML file
-    import { db } from './firebase-config.js';
+    import { db, appCheck } from './firebase-config.js';
     
     // Import the necessary Firestore functions from the modular SDK
     import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    import { getAppCheck, onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
-import { getApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
     
-const app = getApp();
-const appCheck = getAppCheck(app);
-
 let initialWriteDone = false;
 
     function generateShortId(length = 6) {
@@ -502,6 +498,7 @@ onTokenChanged(appCheck, (token) => {
     console.log("App Check token is ready. Starting initial database writes.");
     
     // Call your initial write function here
+
     saveSysdetailstoFB(); 
 
     // Set the flag to prevent it from running again on token refresh

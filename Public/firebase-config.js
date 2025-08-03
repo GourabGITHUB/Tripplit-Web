@@ -25,4 +25,4 @@ import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com
   isTokenAutoRefreshEnabled: true // Set to true for automatic token refresh
 });
   const db = getFirestore(app);
-  export { db };
+  export { db, appCheck };
