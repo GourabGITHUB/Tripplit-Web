@@ -288,7 +288,7 @@ function sleep(ms) {
 window.addEventListener("load", async function () {
   const loader = document.getElementById("loader");
   const content = document.getElementById("content");
-await sleep(2000);
+await sleep(1000);
   loader.style.display = "none";    // hide loader
 });
 </script>
@@ -380,7 +380,7 @@ async function loadTrip() {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
+      await showCustomDialog("Trip found! Redirecting to trip...", [], 1000);
       window.location.href = `your_tripplit.html?id=${savedTrip}`;
     } else {
       showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
@@ -468,7 +468,7 @@ function getSysdetails() {
 
 async function saveSysdetailstoFB() {
   if (!db) {
-    console.error("App Check is not ready for initial write.");
+    console.error("DB is not ready for initial write.");
     return;
   }
 
