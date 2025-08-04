@@ -29,18 +29,9 @@ const appCheck = initializeAppCheck(app, {
 });
 
 // Wait for App Check token before using Firestore
-const appCheckReady = new Promise((resolve) => {
-  const unsubscribe = onTokenChanged(appCheck, (token) => {
-    if (token) {
-      console.log("✅ App Check token is ready.");
-      resolve(); // token is ready
-      unsubscribe(); // stop listening
-    }
-  });
-});
 
 // Delay Firestore until App Check is ready
-const dbPromise = appCheckReady.then(() => getFirestore(app));
+const dbPromise = getFirestore(app);
 
 // Export for main.js to use
-export { appCheck, appCheckReady, dbPromise };
+export { appCheck, dbPromise };

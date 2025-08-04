@@ -294,7 +294,7 @@ await sleep(2000);
 </script>
   <script type="module">
 
-import { dbPromise, appCheckReady } from './firebase-config.js';
+import { dbPromise } from './firebase-config.js';
 import {
   doc,
   setDoc,
@@ -309,7 +309,6 @@ let db = null;
 // Start once App Check is ready
 (async () => {
   try {
-    await appCheckReady;
     isAppCheckReady = true;
     console.log("✅ App Check is ready in main.js");
 
