@@ -24,7 +24,7 @@ function showCustomDialog(message, buttons) {
         dialogOverlay.classList.remove("hidden");
     });
 }
-import { db } from './firebase-config.js';
+import { db, appCheckReady } from './firebase-config.js';
 import {
     doc,
     updateDoc,
@@ -35,6 +35,8 @@ import {
     addDoc,
     collection
 } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
+
+await appCheckReady;
 
 const params = new URLSearchParams(window.location.search);
 const tripId = params.get("id");

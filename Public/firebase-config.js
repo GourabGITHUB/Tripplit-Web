@@ -24,13 +24,12 @@ import { initializeAppCheck, ReCaptchaV3Provider, getToken } from "https://www.g
   provider: new ReCaptchaV3Provider('6Lfnf5krAAAAAPW-AmICgIgfdTdlArS7z1hxZkGi'),
   isTokenAutoRefreshEnabled: true // Set to true for automatic token refresh
 });
-  getToken(appCheck, /* forceRefresh= */ false).then(() => {
   const db = getFirestore(app);
-  // Export db or start Firestore usage only here
+const appCheckReady = getToken(appCheck, false)
+  .then(() => true)
+  .catch((err) => {
+    console.error('App Check failed:', err);
+    return false;
+  });
 
-  // e.g., window.db = db;
-}).catch((error) => {
-  console.error("App Check token error:", error);
-});
-
-  export { db, appCheck };
+export { appCheck, db, appCheckReady };

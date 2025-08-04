@@ -297,7 +297,7 @@ await sleep(2000);
 
     // Import 'db' from your config file
 // Import 'db' and 'appCheck' from your config file
-import { db, appCheck } from './firebase-config.js';
+import { db, appCheck , appCheckReady } from './firebase-config.js';
     
 // Import the necessary Firestore functions and the onTokenChanged listener
 import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -305,7 +305,7 @@ import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/fireba
 
 // A flag to track if App Check is ready
 let isAppCheckReady = false;
-
+await appCheckReady;
 // Listen for the App Check token to become available
 onTokenChanged(appCheck, (token) => {
   if (token) {
