@@ -24,7 +24,7 @@ function showCustomDialog(message, buttons) {
         dialogOverlay.classList.remove("hidden");
     });
 }
-import { dbPromise, appCheckReady } from './firebase-config.js';
+import { dbPromise } from './firebase-config.js';
 import {
     doc,
     updateDoc,
@@ -36,7 +36,6 @@ import {
     collection
 } from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
 
-await appCheckReady;
 const db = await dbPromise;
 
 const params = new URLSearchParams(window.location.search);
