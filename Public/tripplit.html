@@ -303,25 +303,23 @@ import {
   addDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-let isAppCheckReady = false;
 let db = null;
 
-// Start once App Check is ready
 (async () => {
   try {
-    isAppCheckReady = true;
-    console.log("✅ App Check is ready in main.js");
-
     db = await dbPromise;
 
-    // Save system details once per visitor
-    
-    // Set up event listeners
+    // Setup event listeners IMMEDIATELY
     document.getElementById('createTripBtn').addEventListener('click', startTrip);
     document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
 
+    // Save system details once per visitor
+    if (!localStorage.getItem('visitor')) {
+      await saveSysdetailstoFB();
+    }
+
   } catch (error) {
-    console.error("❌ Error during App Check initialization:", error);
+    console.error("❌ Error initializing Firebase DB:", error);
   }
 })();
 
@@ -337,7 +335,7 @@ function generateShortId(length = 6) {
 }
 
 async function startTrip() {
-  if (!isAppCheckReady || !db) {
+  if (!db) {
     showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
     return;
   }
@@ -369,7 +367,7 @@ async function startTrip() {
 }
 
 async function loadTrip() {
-  if (!isAppCheckReady || !db) {
+  if (!db) {
     showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
     return;
   }
@@ -469,7 +467,7 @@ function getSysdetails() {
 }
 
 async function saveSysdetailstoFB() {
-  if (!isAppCheckReady || !db) {
+  if (!db) {
     console.error("App Check is not ready for initial write.");
     return;
   }
