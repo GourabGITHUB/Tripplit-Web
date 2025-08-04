@@ -402,7 +402,7 @@ function showCustomDialog(message, buttons, autoDismissMs = null) {
 
     dialogMessage.textContent = message;
     dialogButtonsContainer.innerHTML = '';
-
+    let resolved = false;
     buttons.forEach(btnConfig => {
       const button = document.createElement("button");
       button.textContent = btnConfig.text;
