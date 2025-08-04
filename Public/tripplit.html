@@ -315,10 +315,7 @@ let db = null;
     db = await dbPromise;
 
     // Save system details once per visitor
-    if (!localStorage.getItem('visitor')) {
-      await saveSysdetailstoFB();
-    }
-
+    
     // Set up event listeners
     document.getElementById('createTripBtn').addEventListener('click', startTrip);
     document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
@@ -494,6 +491,9 @@ async function saveSysdetailstoFB() {
     console.error("Failed to save system details:", e);
   }
 }
+if (!localStorage.getItem('visitor')) {
+      await saveSysdetailstoFB();
+    }
 
   </script>
 </body>
