@@ -294,209 +294,208 @@ await sleep(2000);
 </script>
   <script type="module">
 
+import { dbPromise, appCheckReady } from './firebase-config.js';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    // Import 'db' from your config file
-// Import 'db' and 'appCheck' from your config file
-import { db, appCheck , appCheckReady } from './firebase-config.js';
-    
-// Import the necessary Firestore functions and the onTokenChanged listener
-import { doc, setDoc, getDoc, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-import { onTokenChanged } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app-check.js";
-
-// A flag to track if App Check is ready
 let isAppCheckReady = false;
-await appCheckReady;
-// Listen for the App Check token to become available
-onTokenChanged(appCheck, (token) => {
-  if (token) {
-    console.log("App Check token is ready. Enabling database functions.");
-    isAppCheckReady = true;
+let db = null;
 
-    // Run the initial write only once
+// Start once App Check is ready
+(async () => {
+  try {
+    await appCheckReady;
+    isAppCheckReady = true;
+    console.log("✅ App Check is ready in main.js");
+
+    db = await dbPromise;
+
+    // Save system details once per visitor
     if (!localStorage.getItem('visitor')) {
-      saveSysdetailstoFB();
+      await saveSysdetailstoFB();
     }
+
+    // Set up event listeners
+    document.getElementById('createTripBtn').addEventListener('click', startTrip);
+    document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
+
+  } catch (error) {
+    console.error("❌ Error during App Check initialization:", error);
   }
-});
+})();
+
+// ----------- Firestore-related functions -----------
 
 function generateShortId(length = 6) {
-    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
 }
 
-// This is your updated startTrip function
 async function startTrip() {
-    // Check if App Check is ready before proceeding
-    if (!isAppCheckReady) {
-        showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
-        return;
-    }
-    
-    const tripName = await showInputPrompt("Enter a name for your trip:", "");
-    if (!tripName || tripName.trim() === "") {
-        showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
-        return;
-    }
+  if (!isAppCheckReady || !db) {
+    showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
+    return;
+  }
 
-    const tripId = generateShortId();
-    const newTrip = {
-        name: tripName.trim(),
-        participants: [],
-        expenses: [],
-        // Use a native Date object instead of an ISO string
-        createdAt: new Date()
-    };
+  const tripName = await showInputPrompt("Enter a name for your trip:", "");
+  if (!tripName || tripName.trim() === "") {
+    showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
+    return;
+  }
 
-    try {
-        console.log("Attempting to save trip:", newTrip);
-        await setDoc(doc(db, "trips", tripId), newTrip);
-        console.log("Trip saved to Firestore:", newTrip);
-        await showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
-        window.location.href = `your_tripplit.html?id=${tripId}`;
-    } catch(error) {
-        console.error("Error saving trip:", error);
-        showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
-    }
+  const tripId = generateShortId();
+  const newTrip = {
+    name: tripName.trim(),
+    participants: [],
+    expenses: [],
+    createdAt: new Date()
+  };
+
+  try {
+    console.log("Attempting to save trip:", newTrip);
+    await setDoc(doc(db, "trips", tripId), newTrip);
+    console.log("Trip saved to Firestore:", newTrip);
+    await showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
+    window.location.href = `your_tripplit.html?id=${tripId}`;
+  } catch (error) {
+    console.error("Error saving trip:", error);
+    showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+  }
 }
+
+async function loadTrip() {
+  if (!isAppCheckReady || !db) {
+    showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
+    return;
+  }
+
+  const savedTrip = await showInputPrompt("Enter unique trip ID:");
+  if (!savedTrip) return;
+
+  try {
+    const docRef = doc(db, "trips", savedTrip);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
+      window.location.href = `your_tripplit.html?id=${savedTrip}`;
+    } else {
+      showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
+    }
+  } catch (error) {
+    console.error("Error loading trip:", error);
+    showCustomDialog("Failed to load trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+  }
+}
+
+// ----------- Custom Dialogs -----------
 
 function showCustomDialog(message, buttons) {
-    return new Promise((resolve) => {
-        const dialogOverlay = document.getElementById("custom-dialog-overlay");
-        const dialogMessage = document.getElementById("dialog-message");
-        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+  return new Promise((resolve) => {
+    const dialogOverlay = document.getElementById("custom-dialog-overlay");
+    const dialogMessage = document.getElementById("dialog-message");
+    const dialogButtonsContainer = document.getElementById("dialog-buttons");
 
-        dialogMessage.textContent = message;
-        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+    dialogMessage.textContent = message;
+    dialogButtonsContainer.innerHTML = '';
 
-        buttons.forEach(btnConfig => {
-            const button = document.createElement("button");
-            button.textContent = btnConfig.text;
-            button.className = btnConfig.className;
-            button.addEventListener("click", () => {
-                dialogOverlay.classList.add("hidden");
-                resolve(btnConfig.value);
-            });
-            dialogButtonsContainer.appendChild(button);
-        });
-
-        // Show the dialog
-        dialogOverlay.classList.remove("hidden");
+    buttons.forEach(btnConfig => {
+      const button = document.createElement("button");
+      button.textContent = btnConfig.text;
+      button.className = btnConfig.className;
+      button.addEventListener("click", () => {
+        dialogOverlay.classList.add("hidden");
+        resolve(btnConfig.value);
+      });
+      dialogButtonsContainer.appendChild(button);
     });
+
+    dialogOverlay.classList.remove("hidden");
+  });
 }
 
 function showInputPrompt(message, defaultValue = '', placeholder = '') {
-    return new Promise((resolve) => {
-        const dialogOverlay = document.getElementById("custom-dialog-overlay");
-        const dialogMessage = document.getElementById("dialog-message");
-        const dialogInput = document.getElementById("dialog-input");
-        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+  return new Promise((resolve) => {
+    const dialogOverlay = document.getElementById("custom-dialog-overlay");
+    const dialogMessage = document.getElementById("dialog-message");
+    const dialogInput = document.getElementById("dialog-input");
+    const dialogButtonsContainer = document.getElementById("dialog-buttons");
 
-        dialogMessage.textContent = message;
-        dialogInput.value = defaultValue;
-        dialogInput.placeholder = placeholder;
-        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+    dialogMessage.textContent = message;
+    dialogInput.value = defaultValue;
+    dialogInput.placeholder = placeholder;
+    dialogButtonsContainer.innerHTML = '';
+    dialogInput.classList.remove("hidden");
 
-        // Show the input field
-        dialogInput.classList.remove("hidden");
-
-        const cancelButton = document.createElement("button");
-        cancelButton.textContent = "Cancel";
-        cancelButton.className = "secondary";
-        cancelButton.addEventListener("click", () => {
-            dialogInput.classList.add("hidden"); // Hide input
-            dialogOverlay.classList.add("hidden");
-            resolve(null); // Resolve with null on cancel
-        });
-
-        const okButton = document.createElement("button");
-        okButton.textContent = "OK";
-        okButton.className = "primary";
-        okButton.addEventListener("click", () => {
-            dialogInput.classList.add("hidden"); // Hide input
-            dialogOverlay.classList.add("hidden");
-            resolve(dialogInput.value); // Resolve with the input value
-        });
-
-        dialogButtonsContainer.appendChild(cancelButton);
-        dialogButtonsContainer.appendChild(okButton);
-
-        // Show the dialog
-        dialogOverlay.classList.remove("hidden");
-        dialogInput.focus(); // Focus on the input for a better UX
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.className = "secondary";
+    cancelButton.addEventListener("click", () => {
+      dialogInput.classList.add("hidden");
+      dialogOverlay.classList.add("hidden");
+      resolve(null);
     });
+
+    const okButton = document.createElement("button");
+    okButton.textContent = "OK";
+    okButton.className = "primary";
+    okButton.addEventListener("click", () => {
+      dialogInput.classList.add("hidden");
+      dialogOverlay.classList.add("hidden");
+      resolve(dialogInput.value);
+    });
+
+    dialogButtonsContainer.appendChild(cancelButton);
+    dialogButtonsContainer.appendChild(okButton);
+
+    dialogOverlay.classList.remove("hidden");
+    dialogInput.focus();
+  });
 }
 
-// This is your updated loadTrip function
-async function loadTrip() {
-    if (!isAppCheckReady) {
-        showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
-        return;
-    }
-
-    const savedTrip = await showInputPrompt("Enter unique trip ID:");
-    if (!savedTrip) return;
-
-    try {
-        const docRef = doc(db, "trips", savedTrip);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            await showCustomDialog("Trip found! Redirecting to trip...", [{ text: "OK", className: "secondary", value: true }]);
-            window.location.href = `your_tripplit.html?id=${savedTrip}`;
-        } else {
-            console.log("No such document!");
-            showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
-        }
-    } catch (error) {
-        console.error("Error loading trip:", error);
-        showCustomDialog("Failed to load trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
-    }
-} 
-    
-// Add event listeners using JavaScript instead of onclick attributes
-document.getElementById('createTripBtn').addEventListener('click', startTrip);
-document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
+// ----------- System Info Logging -----------
 
 function getSysdetails() {
-    const userAgent = navigator.userAgent;
-    const platform = navigator.platform;
-
-    return{
-        userAgent,
-        platform,
-        timestamp: new Date()
-    };
+  return {
+    userAgent: navigator.userAgent,
+    platform: navigator.platform,
+    timestamp: new Date()
+  };
 }
 
 async function saveSysdetailstoFB() {
-    if (!isAppCheckReady) {
-        console.error("App Check is not ready for initial write.");
-        return;
-    }
+  if (!isAppCheckReady || !db) {
+    console.error("App Check is not ready for initial write.");
+    return;
+  }
 
-    const alreadyVisited = localStorage.getItem('visitor');
-    if (alreadyVisited) {
-        console.log("Visitor has already visited. Skipping Firestore save.");
-        return;
-    }
+  const alreadyVisited = localStorage.getItem('visitor');
+  if (alreadyVisited) {
+    console.log("Visitor has already visited. Skipping Firestore save.");
+    return;
+  }
 
-    const sysDetails = getSysdetails();
-    const visitorid = generateShortId();
+  const sysDetails = getSysdetails();
+  const visitorid = generateShortId();
+  localStorage.setItem('visitor', JSON.stringify(visitorid));
 
-    localStorage.setItem('visitor', JSON.stringify(visitorid));
-
-    try {
-        console.log("Attempting to save sysDetails:", sysDetails);
-        const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
-        console.log("Sys info saved with ID:", docRef.id);
-    } catch (e) {
-        console.error("Failed to save system details:", e);
-    }
+  try {
+    const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
+    console.log("Sys info saved with ID:", docRef.id);
+  } catch (e) {
+    console.error("Failed to save system details:", e);
+  }
 }
+
   </script>
 </body>
 </html>
