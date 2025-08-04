@@ -27,7 +27,6 @@ import { initializeAppCheck, ReCaptchaV3Provider, getToken } from "https://www.g
   getToken(appCheck, /* forceRefresh= */ false).then(() => {
   const db = getFirestore(app);
   // Export db or start Firestore usage only here
-    const db = getFirestore(app);
 
   // e.g., window.db = db;
 }).catch((error) => {
