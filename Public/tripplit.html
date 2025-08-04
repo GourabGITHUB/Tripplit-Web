@@ -381,6 +381,7 @@ async function loadTrip() {
 
     if (docSnap.exists()) {
       await showCustomDialog("Trip found! Redirecting to trip...", [], 1000);
+
       window.location.href = `your_tripplit.html?id=${savedTrip}`;
     } else {
       showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
@@ -393,7 +394,7 @@ async function loadTrip() {
 
 // ----------- Custom Dialogs -----------
 
-function showCustomDialog(message, buttons) {
+function showCustomDialog(message, buttons, autoDismissMs = null) {
   return new Promise((resolve) => {
     const dialogOverlay = document.getElementById("custom-dialog-overlay");
     const dialogMessage = document.getElementById("dialog-message");
@@ -414,9 +415,16 @@ function showCustomDialog(message, buttons) {
     });
 
     dialogOverlay.classList.remove("hidden");
+ if (autoDismissMs !== null && buttons.length === 0) {
+      setTimeout(() => {
+        if (resolved) return;
+        resolved = true;
+        dialogOverlay.classList.add("hidden");
+        resolve(true); // or null, or any default value
+      }, autoDismissMs);
+    }
   });
 }
-
 function showInputPrompt(message, defaultValue = '', placeholder = '') {
   return new Promise((resolve) => {
     const dialogOverlay = document.getElementById("custom-dialog-overlay");
