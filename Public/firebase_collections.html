@@ -26,13 +26,16 @@
 
   <!-- Firebase SDK -->
   <script type="module">
-     import { db } from './firebase-config.js';
+     import { dbPromise } from './firebase-config.js';
     
     // Import the necessary Firestore functions from the modular SDK
     import { doc, setDoc, getDocs, collection, addDoc} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const fetchBtn = document.getElementById('fetchBtn');
 const dataContainer = document.getElementById('data-container');
+
+    db = await dbPromise;
+
 
 fetchBtn.addEventListener('click', async () => {
   try {
