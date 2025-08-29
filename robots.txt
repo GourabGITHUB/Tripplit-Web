@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /*?id=
+Allow: /
+
+Sitemap: https://tripplit-200.web.app/sitemap.xml
+Sitemap: https://gourabgithub.github.io/Tripplit-Web/sitemap.xml
