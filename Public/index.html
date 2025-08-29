@@ -4,177 +4,284 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="mNxQ-2cD2-KJBKrh3OXmh2kd7wUzDSDGI5DooIX4xHI" />
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-<link rel="canonical" href="https://tripplit-200.web.app/">
+  
+  <!-- Resource hints and preloads for performance -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="dns-prefetch" href="//www.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="Images/logonobg.png" as="image" type="image/png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style">
+  
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="canonical" href="https://tripplit-200.web.app/">
   <title>Tripplit – Easily Split & Manage Group Travel Expenses | Shared Cost Manager</title>
-    <meta name="description" content="Track and split travel costs effortlessly.Tripplit is a seamless web app for organizing, managing, and sharing trip expenses with friends and family. Try Tripplit today!
-">
-
+  <meta name="description" content="Track and split travel costs effortlessly.Tripplit is a seamless web app for organizing, managing, and sharing trip expenses with friends and family. Try Tripplit today!">
+  
+  <!-- Load fonts with optimized display strategy -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  
   <style>
-    /* Full-screen loader */
-#loader {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #F8FAFC;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-/* Spinner styling */
-#loader::after {
-  content: "";
-  width: 40px;
-  height: 40px;
-  border: 5px solid #abede3;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-
-      background-color: #57dbc7 ;
-
-}
-
-/* Spinner animation */
-@keyframes spin {
-    0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-    /* ... your CSS here (no changes) ... */
-/* General & Body Styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-body {
-    background: #F0F2F5;
-    background: linear-gradient(
-        180deg,
-        #F8FAFC 0%,
-        #F0F2F5 100%
-    );
-    color: #111827;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-/* Header & Logo */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.logo-link {
-    display: block;
-}
-.logo {
-    height: 200px;
-    width: auto;
-}
-.heading-wrapper {
-    text-align: center;
-    padding: 0 1.5rem;
-}
-.heading {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-    max-width: 600px;
-    line-height: 1.4;
-    margin-bottom: 0.8rem;
-}span {
-    text-transform: capitalize;
-}
-.start {
-    color: red;
-    font-weight: bolder;
-}
-.end {
-    color: limegreen;
-    font-weight: bolder;
-}
-
-/* Card & Buttons */
-.card {
-    background: #F8F8F8;
-    background: linear-gradient(
-        135deg,
-        #FFFFFF 0%,
-        #F8F8F8 60%,
-        #EAEAEA 100%
-    );
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-.card button {
-    background: #3b82f6;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background 0.2s ease-in-out;
-    margin-top: 1rem;
-    width: 100%;
-}
-.card button:hover {
-    background: #2563eb;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
+    /* Optimized loader - no artificial delay */
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #F8FAFC;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.3s ease-out;
     }
-    .card {
-        padding: 1.5rem;
+    #loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
     }
-    .card button {
-        font-size: 0.95rem;
-        padding: 0.65rem 1rem;
+    /* Spinner styling */
+    #loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 5px solid #abede3;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      background-color: #57dbc7;
+    }
+    /* Spinner animation */
+    @keyframes spin {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
     }
     
-}
-@media (max-width: 768px) {
+    /* General & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #F0F2F5;
+      background: linear-gradient(180deg, #F8FAFC 0%, #F0F2F5 100%);
+      color: #111827;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      opacity: 0;
+      animation: fadeInBody 0.5s ease-in-out 0.1s forwards;
+    }
+    
+    @keyframes fadeInBody {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Header & Logo */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-link {
+      display: block;
+    }
     .logo {
-        height: 80px;
+      height: 200px;
+      width: auto;
+    }
+    .heading-wrapper {
+      text-align: center;
+      padding: 0 1.5rem;
     }
     .heading {
-        font-size: 0.8rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #333;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
     }
-    .loader-image {
-    /* Reduce the size of the image on smaller screens */
-    height: 80px;
-  }
-}
-
-/* Custom Dialog Styles (already correctly centered) */
-#custom-dialog-overlay {
-    position: fixed;
+    span {
+      text-transform: capitalize;
+    }
+    .start {
+      color: red;
+      font-weight: bolder;
+    }
+    .end {
+      color: limegreen;
+      font-weight: bolder;
+    }
+    
+    /* Card & Buttons */
+    .card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8F8F8 60%, #EAEAEA 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 1rem;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .card button {
+      background: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .card button:hover {
+      background: #2563eb;
+    }
+    .card button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    /* Loading state for buttons */
+    .card button.loading {
+      background: #9ca3af;
+      cursor: wait;
+      position: relative;
+    }
+    .card button.loading::after {
+      content: "";
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    /* Consent Banner */
+    #consent-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #1f2937;
+      color: white;
+      padding: 1rem;
+      z-index: 1001;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    #consent-banner.show {
+      transform: translateY(0);
+    }
+    .consent-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .consent-text {
+      flex: 1;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .consent-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .consent-buttons button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: background 0.2s ease;
+    }
+    .consent-accept {
+      background: #22c55e;
+      color: white;
+    }
+    .consent-accept:hover {
+      background: #16a34a;
+    }
+    .consent-decline {
+      background: #64748b;
+      color: white;
+    }
+    .consent-decline:hover {
+      background: #475569;
+    }
+    
+    /* Input validation styling */
+    .input-error {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+    
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      .card {
+        padding: 1.5rem;
+      }
+      .card button {
+        font-size: 0.95rem;
+        padding: 0.65rem 1rem;
+      }
+      .consent-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .consent-buttons {
+        width: 100%;
+        justify-content: center;
+      }
+      .logo {
+        height: 80px;
+      }
+      .heading {
+        font-size: 0.8rem;
+      }
+      .loader-image {
+        height: 80px;
+      }
+    }
+    
+    /* Custom Dialog Styles */
+    #custom-dialog-overlay {
+      position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -182,331 +289,1898 @@ header {
     background-color: rgba(26, 26, 46, 0.8);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start */
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
-}
-#custom-dialog-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-#custom-dialog {
-    background-color: #ffffff;
-    padding: 2.5rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    max-width: 450px;
-    width: 90%;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
-#dialog-message {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-    color: var(--text-color);
-}
-#dialog-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-#dialog-buttons button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-    font-weight: 600;
-}
-#dialog-buttons button.secondary {
-    background-color: #ecf0f1;
-    color: var(--text-color);
-}
-#dialog-buttons button.secondary:hover {
-    background-color: #bdc3c7;
-}
-#dialog-buttons button.primary {
-    background-color: #3461eb;
-    color: #ffffff;
-}
-#dialog-buttons button.primary:hover {
-    background-color: #d64032;
-}
-#dialog-input {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
+    padding-top: 10vh; /* Add padding from top */
     box-sizing: border-box;
-}
-#dialog-input.hidden {
-    display: none;
-}
-@keyframes fadeIn {
-    from {
+    overflow-y: auto; /* Allow scrolling if content is too tall */
+    }
+    #custom-dialog-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #custom-dialog {
+      background-color: #ffffff;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      max-width: 450px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    #dialog-message {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      color: var(--text-color);
+    }
+    #dialog-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    #dialog-buttons button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 600;
+    }
+    #dialog-buttons button.secondary {
+      background-color: #ecf0f1;
+      color: var(--text-color);
+    }
+    #dialog-buttons button.secondary:hover {
+      background-color: #bdc3c7;
+    }
+    #dialog-buttons button.primary {
+      background-color: #3461eb;
+      color: #ffffff;
+    }
+    #dialog-buttons button.primary:hover {
+      background-color: #d64032;
+    }
+    #dialog-input {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    #dialog-input.hidden {
+      display: none;
+    }
+    @keyframes fadeIn {
+       from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
+    }
+    .hidden {
+      display: none !important;
+    }
+    /* Features Section Styles */
+.features-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
 }
+
+
+.features-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.features-subtitle {
+  font-size: 1.125rem;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.feature-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+  color: #3b82f6;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.feature-title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.feature-description {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  color: #6b7280;
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.feature-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* Use Cases Section */
+.use-cases-section {
+  margin-bottom: 3rem;
+}
+
+.use-cases-title {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 2rem;
+}
+
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.use-case {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease;
+}
+
+.use-case:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.use-case-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.use-case h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.use-case p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.cta-section {
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  margin-top: 2rem;
+}
+
+.cta-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.cta-description {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background: #ffffff;
+  color: #3b82f6;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .features-container {
+    padding: 2rem 1rem;
+  }
+  
+  .features-title {
+    font-size: 2rem;
+  }
+  
+  .features-subtitle {
+    font-size: 1rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .feature-card {
+    padding: 1.5rem;
+  }
+  
+  .use-cases-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .use-case {
+    padding: 1.25rem;
+  }
+  
+  .cta-section {
+    padding: 2rem 1rem;
+  }
+  
+  .cta-title {
+    font-size: 1.5rem;
+  }
+  
+  .cta-description {
+    font-size: 1rem;
+  }
+}
+/* How It Works Section */
+.how-it-works-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+  scroll-margin-top: 2rem;
+}
+
+.how-it-works-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 2rem;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.how-it-works-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #10b981, #f59e0b, #ef4444);
+}
+
+.how-it-works-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.how-it-works-subtitle {
+  font-size: 1.125rem;
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Workflow Steps */
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.workflow-steps::before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 4rem;
+  bottom: 4rem;
+  width: 2px;
+  background: linear-gradient(180deg, #3b82f6, #10b981, #f59e0b, #ef4444, #8b5cf6);
+  border-radius: 1px;
+}
+
+.workflow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  position: relative;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workflow-step:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-icon {
+  color: #3b82f6;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.step-description {
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+.step-example {
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.example-label {
+  font-weight: 600;
+  color: #1f2937;
+  margin-right: 0.5rem;
+}
+
+.example-text {
+  color: #6b7280;
+  font-family: 'Courier New', monospace;
+}
+
+/* Step 3 Features */
+.step-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.feature-icon {
+  font-size: 1.25rem;
+}
+
+/* Balance Example */
+.balance-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.balance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+}
+
+.balance-item.positive {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 1px solid #10b981;
+}
+
+.balance-item.negative {
+  background: linear-gradient(135deg, #fef2f2, #fecaca);
+  border: 1px solid #ef4444;
+}
+
+.balance-item .person {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.balance-item .amount {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+}
+
+.balance-item .status {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Settlement Actions */
+.settlement-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+}
+
+.action-text {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.action-button:contains("✓") {
+  background: #10b981;
+  color: white;
+}
+
+/* Benefits Section */
+.workflow-benefits {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.benefits-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 2rem;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.benefit-item {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+}
+
+.benefit-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.benefit-item h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.benefit-item p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Workflow CTA */
+.workflow-cta {
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+}
+
+.workflow-cta-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.workflow-cta-description {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.workflow-cta-button {
+  background: #ffffff;
+  color: #3b82f6;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workflow-cta-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .how-it-works-container {
+    padding: 2rem 1rem;
+  }
+  
+  .how-it-works-title {
+    font-size: 2rem;
+  }
+  
+  .workflow-steps::before {
+    display: none;
+  }
+  
+  .workflow-step {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .step-number {
+    margin: 0 auto;
+  }
+  
+  .balance-item,
+  .action-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-features,
+  .balance-example,
+  .settlement-actions {
+    gap: 0.5rem;
+  }
+  
+  .feature-item,
+  .balance-item,
+  .action-item {
+    padding: 0.75rem;
+  }
+  
+  .workflow-cta {
+    padding: 2rem 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-card {
+    margin: 0;
+  }
+  
+  .use-cases-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* SEO and Accessibility Improvements */
+.features-section {
+  /* Improve semantic structure */
+  scroll-margin-top: 2rem;
+}
+
+.feature-card:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.cta-button:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Print styles for better document formatting */
+@media print {
+  .features-section {
+    break-inside: avoid;
+  }
+  
+  .feature-card {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+}
+/* Footer Styles */
+.site-footer {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: #f9fafb;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  padding: 3rem 0 2rem 0;
+  border-bottom: 1px solid #374151;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-logo {
+  height: 60px;
+  width: auto;
+}
+
+.footer-brand-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.footer-brand-description {
+  color: #d1d5db;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+  max-width: 300px;
+}
+
+.footer-section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links li a {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.footer-links li a:hover {
+  color: #60a5fa;
+  padding-left: 0.5rem;
+}
+
+.footer-links li a:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  padding: 1.5rem 0;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-copyright {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-version {
+  background: #374151;
+  color: #d1d5db;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr ;
+    gap: 2rem;
+  }
+  
+  .footer-brand {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-brand-description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem 0 1.5rem 0;
+  }
+  
+  .footer-brand {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-logo {
+    height: 50px;
+    margin: 0 auto;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0 1rem 0;
+  }
+  
+  .footer-section {
+    text-align: center;
+  }
+  
+  .footer-section-title {
+    font-size: 1rem;
+  }
+  
+  .footer-links li a:hover {
+    padding-left: 0;
+    color: #60a5fa;
+  }
+  
+  .footer-copyright {
+    font-size: 0.8rem;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Footer link interactions for dialogs */
+.footer-links li a:active {
+  color: #3b82f6;
+  transform: translateY(1px);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .footer-links li a {
+    transition: none;
+  }
+  
+  .footer-links li a:hover {
+    padding-left: 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .site-footer {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-top: 2px solid #000000;
+  }
+  
+  .footer-links li a {
+    color: #000000 !important;
+  }
+  
+  .footer-social {
+    display: none;
+  }
+}
+
 
   </style>
 </head>
 <body>
-
-    <div id="loader"> <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="loader-image"></div>
+  <!-- Optimized loader - removed artificial delay -->
+  <div id="loader">
+    <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="loader-image">
+  </div>
+  
+  <!-- Consent Banner -->
+  <div id="consent-banner" class="hidden">
+    <div class="consent-content">
+      <div class="consent-text">
+        We collect basic technical information (browser type, device info) to improve our service. This helps us ensure compatibility and performance. No personal data is stored.
+      </div>
+      <div class="consent-buttons">
+        <button id="consent-accept" class="consent-accept">Accept</button>
+        <button id="consent-decline" class="consent-decline">Decline</button>
+      </div>
+    </div>
+  </div>
 
   <header>
-<a href=" " class="logo-link">
+    <a href=" " class="logo-link">
       <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="logo">
     </a>
   </header>
   <div> 
-<p class="heading"> <span class="start"> Effortless</span> expense sharing for your next <span class="end"> adventure. </span></p>
-</div>
-
+    <p class="heading"> <span class="start"> Effortless</span> expense sharing for your next <span class="end"> adventure. </span></p>
+  </div>
   <div class="card">
     <h2>Manage Your Trips</h2>
     <p style="margin: 1rem 0; color: #6b7280;">Create a new trip or access an existing one</p>
     <button id="createTripBtn">Create Trip</button>
     <button id="loadTripBtn">Load Existing Trip</button>
-
   </div>
   <div id="custom-dialog-overlay" class="hidden">
     <div id="custom-dialog">
-        <p id="dialog-message"></p>
-        <input type="text" id="dialog-input" class="hidden" placeholder="Enter amount">
-        <div id="dialog-buttons">
-            </div>
+      <p id="dialog-message"></p>
+      <input type="text" id="dialog-input" class="hidden" placeholder="Enter amount">
+      <div id="dialog-error" class="error-message hidden"></div>
+      <div id="dialog-buttons"></div>
     </div>
-</div>
-<script> 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-window.addEventListener("load", async function () {
-  const loader = document.getElementById("loader");
-  const content = document.getElementById("content");
-await sleep(1000);
-  loader.style.display = "none";    // hide loader
-});
-</script>
-  <script type="module">
+  </div>
+<!-- Add this section after the existing card and before the custom dialog overlay -->
 
-import { dbPromise } from './firebase-config.js';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  addDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+<!-- Features Section -->
+<section class="features-section" id="features">
+  <div class="features-container">
+    <h2 class="features-title">Why Choose Tripplit?</h2>
+    <p class="features-subtitle">The smartest way to manage shared expenses across any group activity</p>
+    
+    <div class="features-grid">
+      <!-- Feature 1: No Signup Required -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12l2 2 4-4"></path>
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+        </div>
+        <h3 class="feature-title">No Signup Required</h3>
+        <p class="feature-description">Start managing expenses instantly. No accounts, no passwords, no personal information needed. Just create a trip and share the simple 6-character code.</p>
+        <ul class="feature-list">
+          <li>Instant access in seconds</li>
+          <li>Privacy-first approach</li>
+          <li>Share via simple trip codes</li>
+        </ul>
+      </div>
 
-let db = null;
+      <!-- Feature 2: Smart Expense Splitting -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Smart Expense Splitting</h3>
+        <p class="feature-description">Automatically calculate who owes what with intelligent splitting algorithms. Handle equal splits, custom amounts, and complex scenarios effortlessly.</p>
+        <ul class="feature-list">
+          <li>Equal & custom split options</li>
+          <li>Real-time balance calculations</li>
+          <li>Automatic settlement suggestions</li>
+        </ul>
+      </div>
 
-(async () => {
-  try {
-    db = await dbPromise;
+      <!-- Feature 3: Beyond Travel -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Perfect for Any Group Activity</h3>
+        <p class="feature-description">Not just for travel! Use Tripplit for roommate expenses, group dinners, events, shared subscriptions, or any collaborative spending.</p>
+        <ul class="feature-list">
+          <li>Roommate bill sharing</li>
+          <li>Group events & parties</li>
+          <li>Office lunch orders</li>
+          <li>Shared subscriptions</li>
+        </ul>
+      </div>
 
-    // Setup event listeners IMMEDIATELY
-    document.getElementById('createTripBtn').addEventListener('click', startTrip);
-    document.getElementById('loadTripBtn').addEventListener('click', loadTrip);
+      <!-- Feature 4: Real-time Sync -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 4v6h-6"></path>
+            <path d="M1 20v-6h6"></path>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+            <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Real-time Synchronization</h3>
+        <p class="feature-description">Everyone sees updates instantly. Add expenses, settle payments, and track balances with live synchronization across all devices.</p>
+        <ul class="feature-list">
+          <li>Live updates across devices</li>
+          <li>Offline-ready functionality</li>
+          <li>Cross-platform compatibility</li>
+        </ul>
+      </div>
 
-    // Save system details once per visitor
-    if (!localStorage.getItem('visitor')) {
-      await saveSysdetailstoFB();
-    }
+      <!-- Feature 5: Smart Settlement -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <path d="M16 8h4l-4-4v4z"></path>
+            <circle cx="6.5" cy="7.5" r="1.5"></circle>
+            <path d="M10.5 9.5L16 15"></path>
+          </svg>
+        </div>
+        <h3 class="feature-title">Optimized Settlements</h3>
+        <p class="feature-description">Minimize the number of transactions needed to settle all debts. Our smart algorithm reduces complex multi-person settlements to simple one-to-one payments.</p>
+        <ul class="feature-list">
+          <li>Minimize payment transactions</li>
+          <li>Clear settlement instructions</li>
+          <li>Payment tracking & confirmation</li>
+        </ul>
+      </div>
 
-  } catch (error) {
-    console.error("❌ Error initializing Firebase DB:", error);
-  }
-})();
+      <!-- Feature 6: Mobile Optimized -->
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+        </div>
+        <h3 class="feature-title">Mobile-First Design</h3>
+        <p class="feature-description">Fully responsive design that works perfectly on phones, tablets, and desktops. Add expenses on-the-go with an intuitive mobile interface.</p>
+        <ul class="feature-list">
+          <li>Touch-optimized interface</li>
+          <li>Works offline when needed</li>
+          <li>Fast loading on any device</li>
+        </ul>
+      </div>
+    </div>
 
-// ----------- Firestore-related functions -----------
+    <!-- How It Works Section -->
+<section class="how-it-works-section" id="how-it-works">
+  <div class="how-it-works-container">
+    <h2 class="how-it-works-title">How Tripplit Works</h2>
+    <p class="how-it-works-subtitle">Simple steps to fair expense sharing - no complex setup required</p>
+    
+    <div class="workflow-steps">
+      <!-- Step 1: Create Trip -->
+      <div class="workflow-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+              <polyline points="14,2 14,8 20,8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10,9 9,9 8,9"></polyline>
+            </svg>
+          </div>
+          <h3 class="step-title">Create Your Trip</h3>
+          <p class="step-description">Give your expense group a name - could be "Bali Adventure", "Office Lunch", or "Roommate Bills". Get a unique 6-character trip code instantly.</p>
+          <div class="step-example">
+            <span class="example-label">Example:</span>
+            <span class="example-text">Trip: "Weekend Getaway" → Code: ABC123</span>
+          </div>
+        </div>
+      </div>
 
-function generateShortId(length = 6) {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-}
+      <!-- Step 2: Add Participants -->
+      <div class="workflow-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="step-title">Add Participants</h3>
+          <p class="step-description">Share your trip code with friends, family, or colleagues. They join instantly - no accounts needed. Everyone can add themselves with just a name.</p>
+          <div class="step-example">
+            <span class="example-label">Participants:</span>
+            <span class="example-text">Sarah, Mike, Alex, Jennifer</span>
+          </div>
+        </div>
+      </div>
 
-async function startTrip() {
-  if (!db) {
-    showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
-    return;
-  }
+      <!-- Step 3: Add Expenses -->
+      <div class="workflow-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3 class="step-title">Log Expenses</h3>
+          <p class="step-description">Add expenses with category, amount, and who paid. Choose equal split or customize who owes what. Categories help organize different types of spending.</p>
+          <div class="step-features">
+            <div class="feature-item">
+              <span class="feature-icon">🏨</span>
+              <span>Hotel: $320 (split equally)</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🍽️</span>
+              <span>Dinner: $85 (custom split)</span>
+            </div>
+            <div class="feature-item">
+              <span class="feature-icon">🚗</span>
+              <span>Gas: $45 (exclude 1 person)</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  const tripName = await showInputPrompt("Enter a name for your trip:", "");
-  if (!tripName || tripName.trim() === "") {
-    showCustomDialog("Trip name is required.", [{ text: "OK", className: "secondary", value: true }]);
-    return;
-  }
+      <!-- Step 4: Automatic Balance -->
+      <div class="workflow-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20m9-9H3"></path>
+              <path d="M5 7l14 10M19 7L5 17"></path>
+            </svg>
+          </div>
+          <h3 class="step-title">Automatic Balance Summary</h3>
+          <p class="step-description">Tripplit instantly calculates who owes what to whom. Smart algorithms minimize the number of transactions needed to settle all debts fairly.</p>
+          <div class="balance-example">
+            <div class="balance-item positive">
+              <span class="person">Sarah</span>
+              <span class="amount">+$45.50</span>
+              <span class="status">Gets paid</span>
+            </div>
+            <div class="balance-item negative">
+              <span class="person">Mike</span>
+              <span class="amount">-$23.75</span>
+              <span class="status">Owes Sarah</span>
+            </div>
+            <div class="balance-item negative">
+              <span class="person">Alex</span>
+              <span class="amount">-$21.75</span>
+              <span class="status">Owes Sarah</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  const tripId = generateShortId();
-  const newTrip = {
-    name: tripName.trim(),
-    participants: [],
-    expenses: [],
-    createdAt: new Date()
-  };
+      <!-- Step 5: Settlement -->
+      <div class="workflow-step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22,4 12,14.01 9,11.01"></polyline>
+            </svg>
+          </div>
+          <h3 class="step-title">Easy Settlement</h3>
+          <p class="step-description">Get clear instructions on exactly who should pay whom. Mark payments as complete to keep everyone updated. No more confusion or awkward conversations about money.</p>
+          <div class="settlement-actions">
+            <div class="action-item">
+              <span class="action-text">Mike pays Sarah $23.75</span>
+              <span class="action-button">✓ Mark as Paid</span>
+            </div>
+            <div class="action-item">
+              <span class="action-text">Alex pays Sarah $21.75</span>
+              <span class="action-button">⏳ Pending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  try {
-    console.log("Attempting to save trip:", newTrip);
-    await setDoc(doc(db, "trips", tripId), newTrip);
-    console.log("Trip saved to Firestore:", newTrip);
-    await showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
-    window.location.href = `your_tripplit.html?id=${tripId}`;
-  } catch (error) {
-    console.error("Error saving trip:", error);
-    showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
-  }
-}
+    <!-- Key Benefits -->
+    <div class="workflow-benefits">
+      <h3 class="benefits-title">Why This Works So Well</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">⚡</div>
+          <h4>Instant Updates</h4>
+          <p>Everyone sees changes in real-time across all devices</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🧮</div>
+          <h4>Smart Math</h4>
+          <p>Complex calculations handled automatically with precision</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🔐</div>
+          <h4>Private & Secure</h4>
+          <p>Only people with the trip code can access your expenses</p>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📱</div>
+          <h4>Works Everywhere</h4>
+          <p>Any device, any browser - no app downloads required</p>
+        </div>
+      </div>
+    </div>
 
-async function loadTrip() {
-  if (!db) {
-    showCustomDialog("Please wait for the app to initialize.", [{ text: "OK", className: "secondary", value: true }]);
-    return;
-  }
+    <!-- CTA -->
+    <div class="workflow-cta">
+      <h3 class="workflow-cta-title">Ready to Try It?</h3>
+      <p class="workflow-cta-description">Start your first trip in under 30 seconds</p>
+      <button class="workflow-cta-button" onclick="document.getElementById('createTripBtn').click()">
+        Create Your First Trip
+      </button>
+    </div>
+  </div>
+</section>
 
-  const savedTrip = await showInputPrompt("Enter unique trip ID:");
-  if (!savedTrip) return;
 
-  try {
-    const docRef = doc(db, "trips", savedTrip);
-    const docSnap = await getDoc(docRef);
+    <!-- Use Cases Section -->
+    <div class="use-cases-section">
+      <h3 class="use-cases-title">Perfect for Every Scenario</h3>
+      <div class="use-cases-grid">
+        <div class="use-case">
+          <div class="use-case-icon">🏠</div>
+          <h4>Roommate Bills</h4>
+          <p>Split rent, utilities, groceries, and household expenses fairly among roommates.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">✈️</div>
+          <h4>Group Travel</h4>
+          <p>Manage flights, hotels, meals, and activities for vacations and business trips.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🎉</div>
+          <h4>Events & Parties</h4>
+          <p>Organize birthday parties, weddings, or group celebrations with shared costs.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🍽️</div>
+          <h4>Group Dining</h4>
+          <p>Split restaurant bills, group orders, and office lunch deliveries effortlessly.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">📱</div>
+          <h4>Shared Subscriptions</h4>
+          <p>Split streaming services, software licenses, and group memberships fairly.</p>
+        </div>
+        <div class="use-case">
+          <div class="use-case-icon">🏢</div>
+          <h4>Business Expenses</h4>
+          <p>Track team expenses, client entertainment, and project-related costs.</p>
+        </div>
+      </div>
+    </div>
 
-    if (docSnap.exists()) {
-      await showCustomDialog("Trip found! Redirecting to trip...", [], 1000);
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <h3 class="cta-title">Ready to Simplify Your Group Expenses?</h3>
+      <p class="cta-description">Join thousands of users who trust Tripplit for fair, transparent expense sharing</p>
+      <button class="cta-button" onclick="document.getElementById('createTripBtn').click()">
+        Start Your First Trip Free
+      </button>
+    </div>
+  </div>
+</section>
 
-      window.location.href = `your_tripplit.html?id=${savedTrip}`;
-    } else {
-      showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
-    }
-  } catch (error) {
-    console.error("Error loading trip:", error);
-    showCustomDialog("Failed to load trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
-  }
-}
+  <!-- Initial load script - no artificial delay -->
+  <script>
+    // Constants
+    const TRIP_ID_LENGTH = 6;
+    const MAX_TRIP_NAME_LENGTH = 50;
+    const MIN_TRIP_NAME_LENGTH = 2;
+    const TRIP_ID_REGEX = /^[a-zA-Z0-9]{6}$/;
 
-// ----------- Custom Dialogs -----------
+    // Firebase will be loaded after initial render
+    let db = null;
+    let firebaseLoaded = false;
 
-function showCustomDialog(message, buttons, autoDismissMs = null) {
-  return new Promise((resolve) => {
-    const dialogOverlay = document.getElementById("custom-dialog-overlay");
-    const dialogMessage = document.getElementById("dialog-message");
-    const dialogButtonsContainer = document.getElementById("dialog-buttons");
-
-    dialogMessage.textContent = message;
-    dialogButtonsContainer.innerHTML = '';
-    let resolved = false;
-    buttons.forEach(btnConfig => {
-      const button = document.createElement("button");
-      button.textContent = btnConfig.text;
-      button.className = btnConfig.className;
-      button.addEventListener("click", () => {
-        dialogOverlay.classList.add("hidden");
-        resolve(btnConfig.value);
-      });
-      dialogButtonsContainer.appendChild(button);
-    });
-
-    dialogOverlay.classList.remove("hidden");
- if (autoDismissMs !== null && buttons.length === 0) {
+    // Immediate DOM-ready functions
+    function hideLoader() {
+      const loader = document.getElementById("loader");
+      loader.classList.add('fade-out');
       setTimeout(() => {
-        if (resolved) return;
-        resolved = true;
-        dialogOverlay.classList.add("hidden");
-        resolve(true); // or null, or any default value
-      }, autoDismissMs);
-    }
-  });
-}
-function showInputPrompt(message, defaultValue = '', placeholder = '') {
-  return new Promise((resolve) => {
-    const dialogOverlay = document.getElementById("custom-dialog-overlay");
-    const dialogMessage = document.getElementById("dialog-message");
-    const dialogInput = document.getElementById("dialog-input");
-    const dialogButtonsContainer = document.getElementById("dialog-buttons");
-
-    dialogMessage.textContent = message;
-    dialogInput.value = defaultValue;
-    dialogInput.placeholder = placeholder;
-    dialogButtonsContainer.innerHTML = '';
-    dialogInput.classList.remove("hidden");
-
-    const cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
-    cancelButton.className = "secondary";
-    cancelButton.addEventListener("click", () => {
-      dialogInput.classList.add("hidden");
-      dialogOverlay.classList.add("hidden");
-      resolve(null);
-    });
-
-    const okButton = document.createElement("button");
-    okButton.textContent = "OK";
-    okButton.className = "primary";
-    okButton.addEventListener("click", () => {
-      dialogInput.classList.add("hidden");
-      dialogOverlay.classList.add("hidden");
-      resolve(dialogInput.value);
-    });
-
-    dialogButtonsContainer.appendChild(cancelButton);
-    dialogButtonsContainer.appendChild(okButton);
-
-    dialogOverlay.classList.remove("hidden");
-    dialogInput.focus();
-  });
-}
-
-// ----------- System Info Logging -----------
-
-function getSysdetails() {
-  return {
-    userAgent: navigator.userAgent,
-    platform: navigator.platform,
-    timestamp: new Date()
-  };
-}
-
-async function saveSysdetailstoFB() {
-  if (!db) {
-    console.error("DB is not ready for initial write.");
-    return;
-  }
-
-  const alreadyVisited = localStorage.getItem('visitor');
-  if (alreadyVisited) {
-    console.log("Visitor has already visited. Skipping Firestore save.");
-    return;
-  }
-
-  const sysDetails = getSysdetails();
-  const visitorid = generateShortId();
-  localStorage.setItem('visitor', JSON.stringify(visitorid));
-
-  try {
-    const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
-    console.log("Sys info saved with ID:", docRef.id);
-  } catch (e) {
-    console.error("Failed to save system details:", e);
-  }
-}
-if (!localStorage.getItem('visitor')) {
-      await saveSysdetailstoFB();
+        loader.style.display = 'none';
+      }, 300);
     }
 
+    function showConsentBannerIfNeeded() {
+      if (!localStorage.getItem('consent-given')) {
+        const consentBanner = document.getElementById('consent-banner');
+        consentBanner.classList.remove('hidden');
+        // Slight delay for smooth animation
+        setTimeout(() => {
+          consentBanner.classList.add('show');
+        }, 100);
+      }
+    }
+
+    // Setup immediate event listeners (before Firebase loads)
+    function setupInitialEventListeners() {
+      document.getElementById('createTripBtn').addEventListener('click', handleCreateTrip);
+      document.getElementById('loadTripBtn').addEventListener('click', handleLoadTrip);
+      setupConsentBanner();
+    }
+
+    // Handle button clicks before Firebase is ready
+    async function handleCreateTrip() {
+      await ensureFirebaseLoaded();
+      startTrip();
+    }
+
+    async function handleLoadTrip() {
+      await ensureFirebaseLoaded();
+      loadTrip();
+    }
+
+    // Show loading state on buttons while Firebase loads
+    function setButtonLoadingState(loading) {
+      const createBtn = document.getElementById('createTripBtn');
+      const loadBtn = document.getElementById('loadTripBtn');
+      
+      if (loading) {
+        createBtn.classList.add('loading');
+        loadBtn.classList.add('loading');
+        createBtn.disabled = true;
+        loadBtn.disabled = true;
+      } else {
+        createBtn.classList.remove('loading');
+        loadBtn.classList.remove('loading');
+        createBtn.disabled = false;
+        loadBtn.disabled = false;
+      }
+    }
+
+    // Load Firebase SDK dynamically
+    async function loadFirebaseSDK() {
+      if (firebaseLoaded) return;
+      
+      setButtonLoadingState(true);
+      
+      try {
+        // Dynamic import of Firebase modules
+        const [
+          { dbPromise },
+          { doc, setDoc, getDoc, collection, addDoc }
+        ] = await Promise.all([
+          import('./firebase-config.js'),
+          import('https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js')
+        ]);
+
+        // Store Firebase functions globally
+        window.firebaseModules = { doc, setDoc, getDoc, collection, addDoc };
+        
+        // Initialize database
+        db = await dbPromise;
+        firebaseLoaded = true;
+        
+        console.log('✅ Firebase SDK loaded successfully');
+        
+        // Save system details if consent was already given
+        if (localStorage.getItem('consent-given') === 'true' && !localStorage.getItem('visitor')) {
+          await saveSysdetailstoFB();
+        }
+        
+      } catch (error) {
+        console.error("❌ Error loading Firebase SDK:", error);
+        showCustomDialog("Failed to initialize app. Please refresh the page.", [{ text: "OK", className: "secondary", value: true }]);
+      } finally {
+        setButtonLoadingState(false);
+      }
+    }
+
+    // Ensure Firebase is loaded before proceeding
+    async function ensureFirebaseLoaded() {
+      if (!firebaseLoaded) {
+        await loadFirebaseSDK();
+      }
+    }
+
+    // Optimized page load sequence
+    window.addEventListener("DOMContentLoaded", function() {
+      // Immediate actions - no delays
+      hideLoader();
+      setupInitialEventListeners();
+      showConsentBannerIfNeeded();
+      
+      // Start loading Firebase in the background (non-blocking)
+      setTimeout(() => {
+        loadFirebaseSDK();
+      }, 100); // Small delay to let initial render complete
+    });
+
+    // Fallback for older browsers
+    window.addEventListener("load", function() {
+      if (document.readyState !== 'complete') {
+        hideLoader();
+        setupInitialEventListeners();
+        showConsentBannerIfNeeded();
+      }
+    });
+
+    // ----------- Input Validation Functions -----------
+    function sanitizeInput(input) {
+      if (typeof input !== 'string') return '';
+      
+      const htmlTagRegex = /<[^>]*>/g;
+      const scriptRegex = /<script[^>]*>.*?<\/script>/gi;
+      
+      return input
+        .replace(scriptRegex, '')
+        .replace(htmlTagRegex, '')
+        .trim();
+    }
+
+    function validateTripName(tripName) {
+      const errors = [];
+      
+      if (!tripName || tripName.length === 0) {
+        errors.push('Trip name is required');
+      }
+      
+      if (tripName.length < MIN_TRIP_NAME_LENGTH) {
+        errors.push(`Trip name must be at least ${MIN_TRIP_NAME_LENGTH} characters`);
+      }
+      
+      if (tripName.length > MAX_TRIP_NAME_LENGTH) {
+        errors.push(`Trip name must not exceed ${MAX_TRIP_NAME_LENGTH} characters`);
+      }
+      
+      const maliciousPatterns = [
+        /javascript:/i,
+        /data:text\/html/i,
+        /vbscript:/i,
+        /<script/i,
+        /on\w+\s*=/i
+      ];
+      
+      for (const pattern of maliciousPatterns) {
+        if (pattern.test(tripName)) {
+          errors.push('Trip name contains invalid characters');
+          break;
+        }
+      }
+      
+      return {
+        isValid: errors.length === 0,
+        errors: errors
+      };
+    }
+
+    function validateTripId(tripId) {
+      const errors = [];
+      
+      if (!tripId || tripId.length === 0) {
+        errors.push('Trip ID is required');
+      }
+      
+      if (!TRIP_ID_REGEX.test(tripId)) {
+        errors.push('Trip ID must be exactly 6 characters (letters and numbers only)');
+      }
+      
+      return {
+        isValid: errors.length === 0,
+        errors: errors
+      };
+    }
+
+    // ----------- Consent Management -----------
+    function setupConsentBanner() {
+      const acceptBtn = document.getElementById('consent-accept');
+      const declineBtn = document.getElementById('consent-decline');
+      
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('consent-given', 'true');
+        hideConsentBanner();
+        // Save system details if Firebase is ready
+        if (firebaseLoaded) {
+          saveSysdetailstoFB();
+        }
+      });
+      
+      declineBtn.addEventListener('click', () => {
+        localStorage.setItem('consent-given', 'false');
+        hideConsentBanner();
+        showCustomDialog(
+          "We respect your privacy choice. Some analytics features will be disabled, but the app will work normally.",
+          [{ text: "OK", className: "secondary", value: true }]
+        );
+      });
+    }
+
+    function hideConsentBanner() {
+      const consentBanner = document.getElementById('consent-banner');
+      consentBanner.classList.remove('show');
+      setTimeout(() => {
+        consentBanner.classList.add('hidden');
+      }, 300);
+    }
+
+    function hasUserConsent() {
+      return localStorage.getItem('consent-given') === 'true';
+    }
+
+    // ----------- Utility Functions -----------
+    function generateShortId(length = TRIP_ID_LENGTH) {
+      const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    // ----------- Firebase Functions (called after SDK loads) -----------
+    async function startTrip() {
+      if (!db) {
+        showCustomDialog("Firebase is initializing. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+        return;
+      }
+      
+      const tripNameRaw = await showInputPrompt("Enter a name for your trip:", "", "My Awesome Trip");
+      if (tripNameRaw === null) return;
+      
+      const tripName = sanitizeInput(tripNameRaw);
+      const validation = validateTripName(tripName);
+      if (!validation.isValid) {
+        showCustomDialog(
+          `Please fix the following issues:\n• ${validation.errors.join('\n• ')}`, 
+          [{ text: "OK", className: "secondary", value: true }]
+        );
+        return;
+      }
+      
+      const tripId = generateShortId();
+      const newTrip = {
+        name: tripName,
+        participants: [],
+        expenses: [],
+        createdAt: new Date()
+      };
+      
+      try {
+        const { doc, setDoc } = window.firebaseModules;
+        await setDoc(doc(db, "trips", tripId), newTrip);
+        await showCustomDialog(`Trip "${tripName}" created with ID: ${tripId}. Redirecting...`, [{ text: "OK", className: "secondary", value: true }]);
+        window.location.href = `your_tripplit.html?id=${tripId}`;
+      } catch (error) {
+        console.error("Error saving trip:", error);
+        showCustomDialog("Failed to create trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+      }
+    }
+
+    async function loadTrip() {
+      if (!db) {
+        showCustomDialog("Firebase is initializing. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+        return;
+      }
+      
+      const savedTripRaw = await showInputPrompt("Enter unique trip ID:", "", "ABC123");
+      if (savedTripRaw === null) return;
+      
+      const savedTrip = sanitizeInput(savedTripRaw);
+      const validation = validateTripId(savedTrip);
+      if (!validation.isValid) {
+        showCustomDialog(
+          `Please fix the following issues:\n• ${validation.errors.join('\n• ')}`, 
+          [{ text: "OK", className: "secondary", value: true }]
+        );
+        return;
+      }
+      
+      try {
+        const { doc, getDoc } = window.firebaseModules;
+        const docRef = doc(db, "trips", savedTrip);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          await showCustomDialog("Trip found! Redirecting to trip...", [], 1000);
+          window.location.href = `your_tripplit.html?id=${savedTrip}`;
+        } else {
+          showCustomDialog("Oops! Trip ID does not exist.", [{ text: "OK", className: "secondary", value: true }]);
+        }
+      } catch (error) {
+        console.error("Error loading trip:", error);
+        showCustomDialog("Failed to load trip. Please try again.", [{ text: "OK", className: "secondary", value: true }]);
+      }
+    }
+
+    // ----------- Dialog Functions -----------
+    function showCustomDialog(message, buttons, autoDismissMs = null) {
+      return new Promise((resolve) => {
+        const dialogOverlay = document.getElementById("custom-dialog-overlay");
+        const dialogMessage = document.getElementById("dialog-message");
+        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+        const errorDiv = document.getElementById("dialog-error");
+        
+        dialogMessage.textContent = message;
+        dialogButtonsContainer.innerHTML = '';
+        errorDiv.classList.add('hidden');
+        
+        let resolved = false;
+        
+        buttons.forEach(btnConfig => {
+          const button = document.createElement("button");
+          button.textContent = btnConfig.text;
+          button.className = btnConfig.className;
+          button.addEventListener("click", () => {
+            dialogOverlay.classList.add("hidden");
+            resolved = true;
+            resolve(btnConfig.value);
+          });
+          dialogButtonsContainer.appendChild(button);
+        });
+        
+        dialogOverlay.classList.remove("hidden");
+        
+        if (autoDismissMs !== null && buttons.length === 0) {
+          setTimeout(() => {
+            if (resolved) return;
+            resolved = true;
+            dialogOverlay.classList.add("hidden");
+            resolve(true);
+          }, autoDismissMs);
+        }
+      });
+    }
+
+    function showInputPrompt(message, defaultValue = '', placeholder = '') {
+      return new Promise((resolve) => {
+        const dialogOverlay = document.getElementById("custom-dialog-overlay");
+        const dialogMessage = document.getElementById("dialog-message");
+        const dialogInput = document.getElementById("dialog-input");
+        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+        const errorDiv = document.getElementById("dialog-error");
+        
+        dialogMessage.textContent = message;
+        dialogInput.value = defaultValue;
+        dialogInput.placeholder = placeholder;
+        dialogButtonsContainer.innerHTML = '';
+        dialogInput.classList.remove("hidden", "input-error");
+        errorDiv.classList.add('hidden');
+        
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = "Cancel";
+        cancelButton.className = "secondary";
+        cancelButton.addEventListener("click", () => {
+          dialogInput.classList.add("hidden");
+          dialogOverlay.classList.add("hidden");
+          resolve(null);
+        });
+        
+        const okButton = document.createElement("button");
+        okButton.textContent = "OK";
+        okButton.className = "primary";
+        
+        function validateInput() {
+          const value = sanitizeInput(dialogInput.value);
+          let validation;
+          
+          if (placeholder.includes('123') || message.toLowerCase().includes('id')) {
+            validation = validateTripId(value);
+          } else {
+            validation = validateTripName(value);
+          }
+          
+          if (!validation.isValid && value.length > 0) {
+            dialogInput.classList.add('input-error');
+            errorDiv.textContent = validation.errors[0];
+            errorDiv.classList.remove('hidden');
+            okButton.disabled = true;
+          } else {
+            dialogInput.classList.remove('input-error');
+            errorDiv.classList.add('hidden');
+            okButton.disabled = false;
+          }
+        }
+        
+        dialogInput.addEventListener('input', validateInput);
+        
+        okButton.addEventListener("click", () => {
+          const value = sanitizeInput(dialogInput.value);
+          
+          let validation;
+          if (placeholder.includes('123') || message.toLowerCase().includes('id')) {
+            validation = validateTripId(value);
+          } else {
+            validation = validateTripName(value);
+          }
+          
+          if (!validation.isValid) {
+            dialogInput.classList.add('input-error');
+            errorDiv.textContent = validation.errors[0];
+            errorDiv.classList.remove('hidden');
+            return;
+          }
+          
+          dialogInput.classList.add("hidden");
+          dialogOverlay.classList.add("hidden");
+          resolve(value);
+        });
+        
+        dialogInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' && !okButton.disabled) {
+            okButton.click();
+          }
+        });
+        
+        dialogButtonsContainer.appendChild(cancelButton);
+        dialogButtonsContainer.appendChild(okButton);
+        
+        dialogOverlay.classList.remove("hidden");
+        dialogInput.focus();
+      });
+    }
+
+    // ----------- System Info Logging -----------
+    function getSysdetails() {
+      return {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        timestamp: new Date(),
+        consentGiven: true
+      };
+    }
+
+    async function saveSysdetailstoFB() {
+      if (!db || !hasUserConsent()) {
+        return;
+      }
+      
+      const alreadyVisited = localStorage.getItem('visitor');
+      if (alreadyVisited) {
+        return;
+      }
+      
+      const sysDetails = getSysdetails();
+      const visitorid = generateShortId();
+      localStorage.setItem('visitor', JSON.stringify(visitorid));
+      
+      try {
+        const { collection, addDoc } = window.firebaseModules;
+        const docRef = await addDoc(collection(db, "sysDetails"), sysDetails);
+        console.log("Sys info saved with ID:", docRef.id);
+      } catch (e) {
+        console.error("Failed to save system details:", e);
+      }
+    }
   </script>
+<!-- Footer Section -->
+<!-- Footer Section -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Main Footer Content -->
+    <div class="footer-content">
+      <!-- Brand Section -->
+      <div class="footer-brand">
+        <img src="Images/logonobg.png" alt="Tripplit Logo" class="footer-logo">
+        <h3 class="footer-brand-name">Tripplit</h3>
+        <p class="footer-brand-description">
+          Effortless expense sharing for your next adventure. Split costs fairly, settle debts easily, and focus on making memories.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h4 class="footer-section-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#features" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Features</a></li>
+          <li><a href="#how-it-works" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How It Works</a></li>
+          <li><a href="#" onclick="document.getElementById('createTripBtn').click()">Create Trip</a></li>
+          <li><a href="#" onclick="document.getElementById('loadTripBtn').click()">Load Trip</a></li>
+        </ul>
+      </div>
+
+      <!-- Support & Legal -->
+      <div class="footer-section">
+        <h4 class="footer-section-title">Support & Legal</h4>
+        <ul class="footer-links">
+          <li><a href="/contact_us.html" onclick="showContactDialog()">Contact Us</a></li>
+          <li><a href="/privacy_policy.html" onclick="showPrivacyDialog()">Privacy Policy</a></li>
+          <li><a href="/terms.html" onclick="showTermsDialog()">Terms of Service</a></li>
+          <li><a href="/blog.html" onclick="showBlogDialog()">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="footer-copyright">
+          © 2025 Tripplit. All rights reserved. Made with ❤️ for better expense sharing.
+        </p>
+        <div class="footer-social">
+          <span class="footer-version">v2.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

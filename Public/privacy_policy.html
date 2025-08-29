@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="mNxQ-2cD2-KJBKrh3OXmh2kd7wUzDSDGI5DooIX4xHI" />
+  
+  <!-- Resource hints and preloads for performance -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="Images/logonobg.png" as="image" type="image/png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
+  
+  <link rel="canonical" href="https://tripplit-200.web.app/privacy-policy">
+  <title>Privacy Policy - Tripplit | Your Data Protection & Privacy Rights</title>
+  <meta name="description" content="Learn how Tripplit protects your privacy. We collect minimal data, never share personal information, and give you full control over your data. GDPR compliant.">
+  
+  <!-- Load fonts with optimized display strategy -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* General & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(180deg, #F8FAFC 0%, #F0F2F5 100%);
+      color: #111827;
+      line-height: 1.7;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Header */
+    .header {
+      padding: 1rem 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+    
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: #6b7280;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      color: #3b82f6;
+    }
+    
+    .back-btn {
+      background: #3b82f6;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background: #2563eb;
+    }
+    
+    /* Main Content */
+    .main-content {
+      padding: 4rem 0;
+      min-height: calc(100vh - 200px);
+    }
+    
+    .privacy-hero {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .privacy-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+    
+    .privacy-subtitle {
+      font-size: 1.25rem;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+    }
+    
+    .last-updated {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid #cbd5e1;
+    }
+    
+    /* Privacy Content */
+    .privacy-content {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 1.5rem;
+      padding: 4rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e5e7eb;
+      margin-bottom: 2rem;
+    }
+    
+    /* Table of Contents */
+    .table-of-contents {
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .toc-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+    
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .toc-list li {
+      margin: 0;
+    }
+    
+    .toc-link {
+      color: #3b82f6;
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      border-radius: 0.25rem;
+    }
+    
+    .toc-link:hover {
+      color: #1d4ed8;
+      padding-left: 1rem;
+      background: rgba(59, 130, 246, 0.05);
+    }
+    
+    /* Content Sections */
+    .privacy-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 6rem;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e5e7eb;
+      position: relative;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: #3b82f6;
+    }
+    
+    .section-content p {
+      margin-bottom: 1.25rem;
+      color: #374151;
+      font-size: 1rem;
+    }
+    
+    .section-content ul,
+    .section-content ol {
+      margin-bottom: 1.25rem;
+      padding-left: 2rem;
+      color: #374151;
+    }
+    
+    .section-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-content strong {
+      color: #1f2937;
+      font-weight: 600;
+    }
+    
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 1px solid #10b981;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .highlight-box.warning {
+      background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+      border-color: #f59e0b;
+    }
+    
+    .highlight-box.info {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-color: #3b82f6;
+    }
+    
+    .highlight-title {
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .highlight-content {
+      color: #374151;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    /* Data Types Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+    
+    .data-table th {
+      background: #f8fafc;
+      color: #1f2937;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .data-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+    
+    .data-table tr:hover {
+      background: #f8fafc;
+    }
+    
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .data-purpose {
+      font-size: 0.9rem;
+      color: #6b7280;
+      font-style: italic;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: white;
+      border-radius: 1.5rem;
+      padding: 3rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .contact-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-description {
+      color: #d1d5db;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-button {
+      background: #3b82f6;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    
+    .contact-button:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+    
+    /* Footer */
+    .site-footer {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: #f9fafb;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    
+    .footer-content {
+      text-align: center;
+      padding: 1rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-nav a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-nav a:hover {
+      color: #60a5fa;
+    }
+    
+    .footer-copyright {
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .privacy-content {
+        padding: 3rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .privacy-title {
+        font-size: 2.5rem;
+      }
+      
+      .privacy-subtitle {
+        font-size: 1.125rem;
+      }
+      
+      .privacy-content {
+        padding: 2rem;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .footer-nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .data-table {
+        font-size: 0.9rem;
+      }
+      
+      .data-table th,
+      .data-table td {
+        padding: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo-section {
+        gap: 0.5rem;
+      }
+      
+      .logo {
+        height: 40px;
+      }
+      
+      .brand-name {
+        font-size: 1.25rem;
+      }
+      
+      .privacy-title {
+        font-size: 2rem;
+      }
+      
+      .privacy-content,
+      .contact-section {
+        padding: 1.5rem;
+      }
+      
+      .main-content {
+        padding: 2rem 0;
+      }
+      
+      .table-of-contents {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <img src="Images/logonobg.png" alt="Tripplit Logo" class="logo">
+        <a href="/index.html" class="brand-name">Tripplit</a>
+      </div>
+      <nav class="nav-links">
+        <a href="/contact_us.html" class="nav-link">Contact</a>
+        <a href="/index.html#features" class="nav-link">Features</a>
+        <a href="/index.html" class="back-btn">← Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="privacy-hero">
+        <h1 class="privacy-title">Privacy Policy</h1>
+        <p class="privacy-subtitle">
+          Your privacy matters to us. Learn how we collect, use, and protect your information when you use Tripplit.
+        </p>
+        <div class="last-updated">
+          📅 Last updated: August 29, 2025
+        </div>
+      </div>
+
+      <!-- Privacy Content -->
+      <div class="privacy-content">
+        <!-- Table of Contents -->
+        <div class="table-of-contents">
+          <h2 class="toc-title">Quick Navigation</h2>
+          <ul class="toc-list">
+            <li><a href="#overview" class="toc-link">Overview</a></li>
+            <li><a href="#information-we-collect" class="toc-link">Information We Collect</a></li>
+            <li><a href="#how-we-use-information" class="toc-link">How We Use Information</a></li>
+            <li><a href="#information-sharing" class="toc-link">Information Sharing</a></li>
+            <li><a href="#data-security" class="toc-link">Data Security</a></li>
+            <li><a href="#your-choices" class="toc-link">Your Privacy Choices</a></li>
+            <li><a href="#data-retention" class="toc-link">Data Retention</a></li>
+            <li><a href="#international-users" class="toc-link">International Users</a></li>
+            <li><a href="#children-privacy" class="toc-link">Children's Privacy</a></li>
+            <li><a href="#changes" class="toc-link">Policy Changes</a></li>
+            <li><a href="#contact-us" class="toc-link">Contact Information</a></li>
+          </ul>
+        </div>
+
+        <!-- Overview -->
+        <section id="overview" class="privacy-section">
+          <h2 class="section-title">1. Overview</h2>
+          <div class="section-content">
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                🛡️ Privacy-First Approach
+              </div>
+              <p class="highlight-content">
+                Tripplit is designed with privacy at its core. We collect minimal data, give you full control, and never sell your personal information.
+              </p>
+            </div>
+            
+            <p>Tripplit ("we," "our," or "us") respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our expense-sharing web application.</p>
+            
+            <p><strong>Key Principles:</strong></p>
+            <ul>
+              <li><strong>Minimal Data Collection:</strong> We only collect what's necessary to provide our service</li>
+              <li><strong>No Account Required:</strong> You can use Tripplit without creating an account</li>
+              <li><strong>Your Control:</strong> You decide what data to share and can delete it anytime</li>
+              <li><strong>No Selling:</strong> We never sell your personal data to third parties</li>
+              <li><strong>Transparency:</strong> We're open about what we collect and why</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Information We Collect -->
+        <section id="information-we-collect" class="privacy-section">
+          <h2 class="section-title">2. Information We Collect</h2>
+          <div class="section-content">
+            <p>We collect information in three ways: information you provide directly, information collected automatically, and information from third-party services.</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Information You Provide</h3>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>Purpose</th>
+                  <th>Required?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Trip Names</strong></td>
+                  <td>To identify and organize your expense groups</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td><strong>Participant Names</strong></td>
+                  <td>To track who owes what in expense calculations</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td><strong>Expense Details</strong></td>
+                  <td>Categories, amounts, descriptions for splitting costs</td>
+                  <td>Yes</td>
+                </tr>
+                <tr>
+                  <td><strong>Email Address</strong></td>
+                  <td>Contact form submissions and support requests</td>
+                  <td>Optional</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Information Collected Automatically</h3>
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                ⚠️ Consent Required
+              </div>
+              <p class="highlight-content">
+                We only collect technical information if you explicitly consent through our privacy banner. You can decline without affecting app functionality.
+              </p>
+            </div>
+            
+            <p><strong>With Your Consent, We May Collect:</strong></p>
+            <ul>
+              <li><strong>Browser Information:</strong> Browser type and version for compatibility</li>
+              <li><strong>Device Information:</strong> Operating system and device type</li>
+              <li><strong>Usage Analytics:</strong> How you interact with features (anonymized)</li>
+              <li><strong>Technical Data:</strong> IP address, session duration, error logs</li>
+            </ul>
+
+            <p><strong>Always Collected (No Consent Required):</strong></p>
+            <ul>
+              <li><strong>Essential Cookies:</strong> For app functionality only</li>
+              <li><strong>Security Logs:</strong> To prevent abuse and maintain service</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- How We Use Information -->
+        <section id="how-we-use-information" class="privacy-section">
+          <h2 class="section-title">3. How We Use Your Information</h2>
+          <div class="section-content">
+            <p>We use collected information solely to provide and improve Tripplit's expense-sharing service:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Primary Uses</h3>
+            <ul>
+              <li><strong>Service Provision:</strong> Calculate splits, store trip data, sync across devices</li>
+              <li><strong>Feature Enhancement:</strong> Improve user experience and add new functionality</li>
+              <li><strong>Technical Support:</strong> Respond to help requests and troubleshoot issues</li>
+              <li><strong>Security:</strong> Prevent fraud, abuse, and unauthorized access</li>
+              <li><strong>Communication:</strong> Send important service updates (only if you provide email)</li>
+            </ul>
+
+            <div class="highlight-box">
+              <div class="highlight-title">
+                ✅ What We DON'T Do
+              </div>
+              <p class="highlight-content">
+                We never use your data for advertising, marketing to third parties, or selling to data brokers. Your expense information stays private to your group.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Information Sharing -->
+        <section id="information-sharing" class="privacy-section">
+          <h2 class="section-title">4. Information Sharing and Disclosure</h2>
+          <div class="section-content">
+            <p>We have a strict policy on information sharing. Your personal data is never sold or shared for commercial purposes.</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">When We May Share Information</h3>
+            <ul>
+              <li><strong>With Your Trip Participants:</strong> Only expense data you choose to share</li>
+              <li><strong>Service Providers:</strong> Firebase (Google) for data hosting with strict privacy agreements</li>
+              <li><strong>Legal Requirements:</strong> If required by law, court order, or to protect rights and safety</li>
+              <li><strong>Business Transfer:</strong> In case of merger or acquisition (with privacy protection guarantees)</li>
+            </ul>
+
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                🔒 Third-Party Services
+              </div>
+              <p class="highlight-content">
+                We use Google Firebase for secure data storage and Formspree for contact forms. Both services maintain high privacy and security standards and are GDPR compliant.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Data Security -->
+        <section id="data-security" class="privacy-section">
+          <h2 class="section-title">5. Data Security</h2>
+          <div class="section-content">
+            <p>We implement industry-standard security measures to protect your information:</p>
+
+            <ul>
+              <li><strong>Encryption:</strong> All data is encrypted in transit (HTTPS) and at rest</li>
+              <li><strong>Access Controls:</strong> Limited access to data with multi-factor authentication</li>
+              <li><strong>Regular Updates:</strong> Security patches and system updates applied promptly</li>
+              <li><strong>Monitoring:</strong> 24/7 security monitoring and threat detection</li>
+              <li><strong>Backup Security:</strong> Encrypted backups with restricted access</li>
+            </ul>
+
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                ⚠️ Important Security Note
+              </div>
+              <p class="highlight-content">
+                While we use strong security measures, no internet service is 100% secure. Keep your trip codes private and only share with trusted group members.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Your Choices -->
+        <section id="your-choices" class="privacy-section">
+          <h2 class="section-title">6. Your Privacy Rights and Choices</h2>
+          <div class="section-content">
+            <p>You have significant control over your privacy on Tripplit:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Your Rights</h3>
+            <ul>
+              <li><strong>Access:</strong> View all data we have about you</li>
+              <li><strong>Correction:</strong> Update or correct your information</li>
+              <li><strong>Deletion:</strong> Delete your trips and associated data anytime</li>
+              <li><strong>Portability:</strong> Export your data in a readable format</li>
+              <li><strong>Consent Withdrawal:</strong> Change your mind about data collection anytime</li>
+              <li><strong>Objection:</strong> Object to processing for specific purposes</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">How to Exercise Your Rights</h3>
+            <ul>
+              <li><strong>Self-Service:</strong> Delete trips directly in the app interface</li>
+              <li><strong>Privacy Controls:</strong> Change consent preferences in your browser settings</li>
+              <li><strong>Email Us:</strong> Contact support@tripplit.app for data requests</li>
+              <li><strong>Response Time:</strong> We respond to privacy requests within 30 days</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Data Retention -->
+        <section id="data-retention" class="privacy-section">
+          <h2 class="section-title">7. Data Retention</h2>
+          <div class="section-content">
+            <p>We keep your data only as long as necessary to provide our service:</p>
+
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Data Type</th>
+                  <th>Retention Period</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Trip Data</strong></td>
+                  <td>Until you delete the trip</td>
+                  <td>Active service provision</td>
+                </tr>
+                <tr>
+                  <td><strong>Technical Logs</strong></td>
+                  <td>90 days maximum</td>
+                  <td>Security and troubleshooting</td>
+                </tr>
+                <tr>
+                  <td><strong>Contact Form Data</strong></td>
+                  <td>2 years maximum</td>
+                  <td>Customer support history</td>
+                </tr>
+                <tr>
+                  <td><strong>Analytics Data</strong></td>
+                  <td>12 months maximum</td>
+                  <td>Service improvement</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="highlight-box">
+              <div class="highlight-title">
+                🗑️ Automatic Deletion
+              </div>
+              <p class="highlight-content">
+                Inactive trips (no activity for 2+ years) may be automatically deleted after email notification to trip creators, if contact information is available.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- International Users -->
+        <section id="international-users" class="privacy-section">
+          <h2 class="section-title">8. International Data Transfers</h2>
+          <div class="section-content">
+            <p>Tripplit serves users globally. Your data may be processed in countries other than your own:</p>
+
+            <ul>
+              <li><strong>Data Location:</strong> Primary servers located in the United States</li>
+              <li><strong>GDPR Compliance:</strong> Full compliance with European privacy regulations</li>
+              <li><strong>Adequacy Decisions:</strong> We use providers with recognized privacy frameworks</li>
+              <li><strong>Standard Contractual Clauses:</strong> Legal protections for international transfers</li>
+              <li><strong>Your Rights:</strong> Same privacy rights regardless of your location</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Children's Privacy -->
+        <section id="children-privacy" class="privacy-section">
+          <h2 class="section-title">9. Children's Privacy</h2>
+          <div class="section-content">
+            <p>Tripplit is not designed for children under 13 years of age:</p>
+
+            <ul>
+              <li><strong>Age Restriction:</strong> Service intended for users 13 years and older</li>
+              <li><strong>No Intentional Collection:</strong> We don't knowingly collect data from children under 13</li>
+              <li><strong>Parental Notice:</strong> If we discover under-13 usage, we delete the data immediately</li>
+              <li><strong>Teen Privacy:</strong> Users 13-18 should have parental guidance when using financial apps</li>
+            </ul>
+
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                👨‍👩‍👧‍👦 Parents and Guardians
+              </div>
+              <p class="highlight-content">
+                If you believe your child under 13 has used Tripplit, please contact us immediately at support@tripplit.app so we can remove their information.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Policy Changes -->
+        <section id="changes" class="privacy-section">
+          <h2 class="section-title">10. Changes to This Privacy Policy</h2>
+          <div class="section-content">
+            <p>We may update this privacy policy to reflect changes in our practices or legal requirements:</p>
+
+            <ul>
+              <li><strong>Notification Method:</strong> Updates posted on this page with revised date</li>
+              <li><strong>Significant Changes:</strong> Email notification if you've provided contact information</li>
+              <li><strong>Continued Use:</strong> Using Tripplit after changes means you accept the updated policy</li>
+              <li><strong>Version History:</strong> Previous versions available upon request</li>
+            </ul>
+
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                📧 Stay Informed
+              </div>
+              <p class="highlight-content">
+                Bookmark this page or check periodically for updates. We recommend reviewing our privacy policy annually.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="contact-section" id="contact-us">
+        <h2 class="contact-title">Questions About Your Privacy?</h2>
+        <p class="contact-description">
+          Our team is here to help with any privacy questions or concerns. We're committed to transparency and protecting your rights.
+        </p>
+        <a href="/contact_us.html" class="contact-button">Contact Privacy Team</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-nav">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#features">Features</a>
+        <a href="/contact_us.html">Contact</a>
+        <a href="#" onclick="showTermsDialog()">Terms of Service</a>
+      </nav>
+      <p class="footer-copyright">
+        © 2025 Tripplit. All rights reserved. Made with ❤️ for better expense sharing.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for table of contents links
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Add visual highlight to the section
+          targetElement.style.background = 'rgba(59, 130, 246, 0.05)';
+          setTimeout(() => {
+            targetElement.style.background = '';
+          }, 2000);
+        }
+      });
+    });
+
+    // Terms dialog for footer
+    function showTermsDialog() {
+      alert("Terms of Service\n\n• Free to use for personal and commercial purposes\n• No warranty provided, use at your own risk\n• Respect other users and don't misuse the service\n• We reserve the right to terminate accounts for abuse\n\nFull terms available at: tripplit.app/terms");
+    }
+
+    // Add scroll spy functionality for table of contents
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('.privacy-section');
+      const tocLinks = document.querySelectorAll('.toc-link');
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.style.fontWeight = '400';
+        link.style.color = '#3b82f6';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.fontWeight = '600';
+          link.style.color = '#1d4ed8';
+        }
+      });
+    });
+
+    // Add print styles
+    window.addEventListener('beforeprint', function() {
+      document.querySelectorAll('.highlight-box').forEach(box => {
+        box.style.breakInside = 'avoid';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="mNxQ-2cD2-KJBKrh3OXmh2kd7wUzDSDGI5DooIX4xHI" />
+  
+  <!-- Resource hints and preloads for performance -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical assets -->
+  <link rel="preload" href="Images/logonobg.png" as="image" type="image/png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
+  
+  <link rel="canonical" href="https://tripplit-200.web.app/terms-of-service">
+  <title>Terms of Service - Tripplit | User Agreement & Service Rules</title>
+  <meta name="description" content="Read Tripplit's Terms of Service. Understand your rights and responsibilities when using our expense sharing platform. Fair use policy and service guidelines.">
+  
+  <!-- Load fonts with optimized display strategy -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* General & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(180deg, #F8FAFC 0%, #F0F2F5 100%);
+      color: #111827;
+      line-height: 1.7;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    /* Header */
+    .header {
+      padding: 1rem 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+    
+    .brand-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: #6b7280;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-link:hover {
+      color: #3b82f6;
+    }
+    
+    .back-btn {
+      background: #3b82f6;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background: #2563eb;
+    }
+    
+    /* Main Content */
+    .main-content {
+      padding: 4rem 0;
+      min-height: calc(100vh - 200px);
+    }
+    
+    .terms-hero {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .terms-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+    
+    .terms-subtitle {
+      font-size: 1.25rem;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto 2rem auto;
+    }
+    
+    .last-updated {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      display: inline-block;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid #cbd5e1;
+    }
+    
+    /* Terms Content */
+    .terms-content {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 1.5rem;
+      padding: 4rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      border: 1px solid #e5e7eb;
+      margin-bottom: 2rem;
+    }
+    
+    /* Table of Contents */
+    .table-of-contents {
+      background: #f8fafc;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .toc-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+    
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .toc-list li {
+      margin: 0;
+    }
+    
+    .toc-link {
+      color: #3b82f6;
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 0;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+      border-radius: 0.25rem;
+    }
+    
+    .toc-link:hover {
+      color: #1d4ed8;
+      padding-left: 1rem;
+      background: rgba(59, 130, 246, 0.05);
+    }
+    
+    /* Content Sections */
+    .terms-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 6rem;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #e5e7eb;
+      position: relative;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: #3b82f6;
+    }
+    
+    .section-content p {
+      margin-bottom: 1.25rem;
+      color: #374151;
+      font-size: 1rem;
+    }
+    
+    .section-content ul,
+    .section-content ol {
+      margin-bottom: 1.25rem;
+      padding-left: 2rem;
+      color: #374151;
+    }
+    
+    .section-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-content strong {
+      color: #1f2937;
+      font-weight: 600;
+    }
+    
+    /* Highlight Boxes */
+    .highlight-box {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 1px solid #10b981;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .highlight-box.warning {
+      background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+      border-color: #f59e0b;
+    }
+    
+    .highlight-box.info {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-color: #3b82f6;
+    }
+    
+    .highlight-box.important {
+      background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+      border-color: #ef4444;
+    }
+    
+    .highlight-title {
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .highlight-content {
+      color: #374151;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    
+    /* Usage Guidelines Table */
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+    
+    .usage-table th {
+      background: #f8fafc;
+      color: #1f2937;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    
+    .usage-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+    
+    .usage-table tr:hover {
+      background: #f8fafc;
+    }
+    
+    .usage-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .allowed {
+      color: #059669;
+      font-weight: 600;
+    }
+    
+    .prohibited {
+      color: #dc2626;
+      font-weight: 600;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: white;
+      border-radius: 1.5rem;
+      padding: 3rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    
+    .contact-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-description {
+      color: #d1d5db;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-button {
+      background: #3b82f6;
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    
+    .contact-button:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+    
+    /* Footer */
+    .site-footer {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      color: #f9fafb;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    
+    .footer-content {
+      text-align: center;
+      padding: 1rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-nav a {
+      color: #d1d5db;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer-nav a:hover {
+      color: #60a5fa;
+    }
+    
+    .footer-copyright {
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .terms-content {
+        padding: 3rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .terms-title {
+        font-size: 2.5rem;
+      }
+      
+      .terms-subtitle {
+        font-size: 1.125rem;
+      }
+      
+      .terms-content {
+        padding: 2rem;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .footer-nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .usage-table {
+        font-size: 0.9rem;
+      }
+      
+      .usage-table th,
+      .usage-table td {
+        padding: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo-section {
+        gap: 0.5rem;
+      }
+      
+      .logo {
+        height: 40px;
+      }
+      
+      .brand-name {
+        font-size: 1.25rem;
+      }
+      
+      .terms-title {
+        font-size: 2rem;
+      }
+      
+      .terms-content,
+      .contact-section {
+        padding: 1.5rem;
+      }
+      
+      .main-content {
+        padding: 2rem 0;
+      }
+      
+      .table-of-contents {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <img src="Images/logonobg.png" alt="Tripplit Logo" class="logo">
+        <a href="/index.html" class="brand-name">Tripplit</a>
+      </div>
+      <nav class="nav-links">
+        <a href="/contact_us.html" class="nav-link">Contact</a>
+        <a href="/privacy_policy.html" class="nav-link">Privacy</a>
+        <a href="/index.html" class="back-btn">← Back to Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="terms-hero">
+        <h1 class="terms-title">Terms of Service</h1>
+        <p class="terms-subtitle">
+          These terms govern your use of Tripplit. By using our expense sharing service, you agree to these terms and conditions.
+        </p>
+        <div class="last-updated">
+          📅 Last updated: August 29, 2025
+        </div>
+      </div>
+
+      <!-- Terms Content -->
+      <div class="terms-content">
+        <!-- Table of Contents -->
+        <div class="table-of-contents">
+          <h2 class="toc-title">Quick Navigation</h2>
+          <ul class="toc-list">
+            <li><a href="#acceptance" class="toc-link">Acceptance of Terms</a></li>
+            <li><a href="#description" class="toc-link">Service Description</a></li>
+            <li><a href="#eligibility" class="toc-link">User Eligibility</a></li>
+            <li><a href="#usage-guidelines" class="toc-link">Usage Guidelines</a></li>
+            <li><a href="#user-responsibilities" class="toc-link">User Responsibilities</a></li>
+            <li><a href="#prohibited-uses" class="toc-link">Prohibited Uses</a></li>
+            <li><a href="#intellectual-property" class="toc-link">Intellectual Property</a></li>
+            <li><a href="#disclaimer" class="toc-link">Disclaimer of Warranties</a></li>
+            <li><a href="#limitation-liability" class="toc-link">Limitation of Liability</a></li>
+            <li><a href="#termination" class="toc-link">Termination</a></li>
+            <li><a href="#governing-law" class="toc-link">Governing Law</a></li>
+            <li><a href="#changes" class="toc-link">Changes to Terms</a></li>
+            <li><a href="#contact-terms" class="toc-link">Contact Information</a></li>
+          </ul>
+        </div>
+
+        <!-- Acceptance of Terms -->
+        <section id="acceptance" class="terms-section">
+          <h2 class="section-title">1. Acceptance of Terms</h2>
+          <div class="section-content">
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                📋 Agreement Overview
+              </div>
+              <p class="highlight-content">
+                By accessing or using Tripplit, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, please discontinue use immediately.
+              </p>
+            </div>
+            
+            <p>Welcome to Tripplit! These Terms of Service ("Terms") constitute a legally binding agreement between you and Tripplit ("we," "us," or "our") regarding your use of our expense-sharing web application and related services.</p>
+            
+            <p><strong>By using Tripplit, you acknowledge that:</strong></p>
+            <ul>
+              <li>You have read and understood these Terms</li>
+              <li>You agree to be bound by these Terms and our Privacy Policy</li>
+              <li>You will comply with all applicable laws and regulations</li>
+              <li>You are legally capable of entering into binding agreements</li>
+            </ul>
+            
+            <p>If you are using Tripplit on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+          </div>
+        </section>
+
+        <!-- Service Description -->
+        <section id="description" class="terms-section">
+          <h2 class="section-title">2. Service Description</h2>
+          <div class="section-content">
+            <p>Tripplit is a web-based expense sharing application that helps groups manage and split costs fairly. Our service includes:</p>
+
+            <ul>
+              <li><strong>Trip Creation:</strong> Create expense groups with unique identifiers</li>
+              <li><strong>Expense Tracking:</strong> Log and categorize group expenses</li>
+              <li><strong>Cost Splitting:</strong> Calculate fair splits among participants</li>
+              <li><strong>Balance Calculation:</strong> Determine who owes what to whom</li>
+              <li><strong>Settlement Optimization:</strong> Minimize transactions needed for settlement</li>
+              <li><strong>Real-time Sync:</strong> Updates across all devices and participants</li>
+            </ul>
+
+            <div class="highlight-box">
+              <div class="highlight-title">
+                ✨ Service Availability
+              </div>
+              <p class="highlight-content">
+                Tripplit is provided "as is" and we strive for 99.9% uptime, but cannot guarantee uninterrupted service. We may perform maintenance or updates that temporarily affect availability.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Eligibility -->
+        <section id="eligibility" class="terms-section">
+          <h2 class="section-title">3. User Eligibility</h2>
+          <div class="section-content">
+            <p>To use Tripplit, you must meet the following requirements:</p>
+
+            <ul>
+              <li><strong>Age Requirement:</strong> You must be at least 13 years old</li>
+              <li><strong>Legal Capacity:</strong> You must be legally capable of forming binding contracts</li>
+              <li><strong>Geographic Restrictions:</strong> Service available worldwide (subject to local laws)</li>
+              <li><strong>Account Integrity:</strong> You must provide accurate information when requested</li>
+            </ul>
+
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                🔞 Minors (13-18 years old)
+              </div>
+              <p class="highlight-content">
+                If you are under 18, you should have parental or guardian supervision when using financial applications. Parents are responsible for monitoring their minor children's use.
+              </p>
+            </div>
+
+            <p><strong>Prohibited Users:</strong> You may not use Tripplit if you have been previously banned or if your use violates any applicable laws in your jurisdiction.</p>
+          </div>
+        </section>
+
+        <!-- Usage Guidelines -->
+        <section id="usage-guidelines" class="terms-section">
+          <h2 class="section-title">4. Usage Guidelines</h2>
+          <div class="section-content">
+            <p>Tripplit is designed for legitimate expense sharing. Here's what you can and cannot do:</p>
+
+            <table class="usage-table">
+              <thead>
+                <tr>
+                  <th>Use Case</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Group travel expenses</td>
+                  <td class="allowed">✅ Allowed</td>
+                  <td>Primary intended use case</td>
+                </tr>
+                <tr>
+                  <td>Roommate bill sharing</td>
+                  <td class="allowed">✅ Allowed</td>
+                  <td>Rent, utilities, groceries, etc.</td>
+                </tr>
+                <tr>
+                  <td>Business team expenses</td>
+                  <td class="allowed">✅ Allowed</td>
+                  <td>Lunches, client entertainment, etc.</td>
+                </tr>
+                <tr>
+                  <td>Event planning costs</td>
+                  <td class="allowed">✅ Allowed</td>
+                  <td>Parties, weddings, gatherings</td>
+                </tr>
+                <tr>
+                  <td>Gambling or betting pools</td>
+                  <td class="prohibited">❌ Prohibited</td>
+                  <td>Not intended for gambling activities</td>
+                </tr>
+                <tr>
+                  <td>Illegal activities</td>
+                  <td class="prohibited">❌ Prohibited</td>
+                  <td>No illegal transactions</td>
+                </tr>
+                <tr>
+                  <td>Money laundering</td>
+                  <td class="prohibited">❌ Prohibited</td>
+                  <td>Legitimate expenses only</td>
+                </tr>
+                <tr>
+                  <td>Commercial bill splitting service</td>
+                  <td class="prohibited">❌ Prohibited</td>
+                  <td>For personal/group use, not resale</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- User Responsibilities -->
+        <section id="user-responsibilities" class="terms-section">
+          <h2 class="section-title">5. User Responsibilities</h2>
+          <div class="section-content">
+            <p>As a Tripplit user, you are responsible for:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Data and Security</h3>
+            <ul>
+              <li><strong>Trip Code Security:</strong> Keep your trip codes private and share only with authorized participants</li>
+              <li><strong>Accurate Information:</strong> Provide correct expense amounts, descriptions, and participant details</li>
+              <li><strong>Data Backup:</strong> Keep your own records of important financial information</li>
+              <li><strong>Account Security:</strong> Protect access to your trips and report unauthorized use</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Fair Use</h3>
+            <ul>
+              <li><strong>Reasonable Usage:</strong> Use the service for its intended purpose without excessive automation</li>
+              <li><strong>Resource Limits:</strong> Don't overwhelm our servers with excessive requests</li>
+              <li><strong>Respectful Behavior:</strong> Treat other users and support staff with respect</li>
+              <li><strong>Legal Compliance:</strong> Follow all applicable laws in your jurisdiction</li>
+            </ul>
+
+            <div class="highlight-box important">
+              <div class="highlight-title">
+                ⚠️ Important Responsibility
+              </div>
+              <p class="highlight-content">
+                You are solely responsible for all expenses and settlements within your groups. Tripplit is a calculation tool only - we do not process payments or verify expense legitimacy.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Prohibited Uses -->
+        <section id="prohibited-uses" class="terms-section">
+          <h2 class="section-title">6. Prohibited Uses</h2>
+          <div class="section-content">
+            <p>You may not use Tripplit for any of the following purposes:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Illegal Activities</h3>
+            <ul>
+              <li>Money laundering or terrorist financing</li>
+              <li>Tax evasion or fraud</li>
+              <li>Illegal gambling or betting</li>
+              <li>Drug trafficking or other criminal activities</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Technical Abuse</h3>
+            <ul>
+              <li>Attempting to hack, breach, or compromise our security</li>
+              <li>Using bots, scrapers, or automated tools without permission</li>
+              <li>Reverse engineering our application or algorithms</li>
+              <li>Introducing viruses, malware, or malicious code</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Service Abuse</h3>
+            <ul>
+              <li>Creating fake or duplicate trips for deceptive purposes</li>
+              <li>Impersonating other users or organizations</li>
+              <li>Spamming or sending unsolicited communications through our platform</li>
+              <li>Commercially reselling access to Tripplit</li>
+            </ul>
+
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                🚨 Violation Consequences
+              </div>
+              <p class="highlight-content">
+                Violations may result in immediate termination of access, deletion of data, and potential legal action. We may also report illegal activities to appropriate authorities.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Intellectual Property -->
+        <section id="intellectual-property" class="terms-section">
+          <h2 class="section-title">7. Intellectual Property</h2>
+          <div class="section-content">
+            <p>Tripplit and all related intellectual property rights are owned by us or our licensors:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Our Rights</h3>
+            <ul>
+              <li><strong>Trademarks:</strong> "Tripplit" name, logos, and branding elements</li>
+              <li><strong>Software:</strong> Application code, algorithms, and technical implementations</li>
+              <li><strong>Content:</strong> Documentation, help materials, and user interfaces</li>
+              <li><strong>Design:</strong> Visual design, user experience, and interface elements</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Your Rights</h3>
+            <ul>
+              <li><strong>User Data:</strong> You retain ownership of your expense data and trip information</li>
+              <li><strong>Limited License:</strong> You may use Tripplit for personal and commercial expense sharing</li>
+              <li><strong>Fair Use:</strong> You may reference Tripplit in reasonable business contexts</li>
+            </ul>
+
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                📄 Open Source Components
+              </div>
+              <p class="highlight-content">
+                Tripplit uses some open source libraries and components. These remain subject to their respective licenses and are not covered by our proprietary rights.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <section id="disclaimer" class="terms-section">
+          <h2 class="section-title">8. Disclaimer of Warranties</h2>
+          <div class="section-content">
+            <div class="highlight-box important">
+              <div class="highlight-title">
+                ⚖️ Legal Disclaimer
+              </div>
+              <p class="highlight-content">
+                Tripplit is provided "AS IS" without warranties of any kind. This is a standard legal protection that allows us to offer free services.
+              </p>
+            </div>
+
+            <p><strong>TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING:</strong></p>
+
+            <ul>
+              <li><strong>Accuracy:</strong> We don't warrant that calculations are error-free (though we strive for accuracy)</li>
+              <li><strong>Availability:</strong> We don't guarantee 100% uptime or uninterrupted service</li>
+              <li><strong>Security:</strong> We don't warrant complete security against all possible threats</li>
+              <li><strong>Compatibility:</strong> We don't guarantee compatibility with all devices or browsers</li>
+              <li><strong>Fitness for Purpose:</strong> We don't warrant suitability for your specific needs</li>
+            </ul>
+
+            <p><strong>What This Means for You:</strong></p>
+            <ul>
+              <li>Always verify important calculations independently</li>
+              <li>Keep backup records of your financial data</li>
+              <li>Don't rely solely on Tripplit for critical financial decisions</li>
+              <li>Use the service at your own risk and discretion</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Limitation of Liability -->
+        <section id="limitation-liability" class="terms-section">
+          <h2 class="section-title">9. Limitation of Liability</h2>
+          <div class="section-content">
+            <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, TRIPPLIT SHALL NOT BE LIABLE FOR:</strong></p>
+
+            <ul>
+              <li><strong>Indirect Damages:</strong> Lost profits, data loss, or business interruption</li>
+              <li><strong>User Disputes:</strong> Conflicts between group members about expenses or settlements</li>
+              <li><strong>Third-Party Actions:</strong> Actions of other users or external services</li>
+              <li><strong>Service Interruptions:</strong> Temporary outages or maintenance periods</li>
+              <li><strong>Data Loss:</strong> Loss of trip data due to technical issues (though we maintain backups)</li>
+            </ul>
+
+            <div class="highlight-box warning">
+              <div class="highlight-title">
+                💰 Damage Cap
+              </div>
+              <p class="highlight-content">
+                Our total liability for any claims shall not exceed $100 USD or the amount you paid for premium features (if any) in the past 12 months, whichever is greater.
+              </p>
+            </div>
+
+            <p><strong>Exceptions:</strong> This limitation doesn't apply to liability for death, personal injury, fraud, or gross negligence where prohibited by law.</p>
+          </div>
+        </section>
+
+        <!-- Termination -->
+        <section id="termination" class="terms-section">
+          <h2 class="section-title">10. Termination</h2>
+          <div class="section-content">
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Your Rights</h3>
+            <ul>
+              <li><strong>Stop Using:</strong> You can stop using Tripplit at any time without notice</li>
+              <li><strong>Delete Data:</strong> You can delete your trips and associated data anytime</li>
+              <li><strong>Data Export:</strong> You can export your data before termination</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Our Rights</h3>
+            <p>We may suspend or terminate your access if you:</p>
+            <ul>
+              <li>Violate these Terms of Service</li>
+              <li>Engage in illegal or harmful activities</li>
+              <li>Abuse our service or infrastructure</li>
+              <li>Repeatedly violate our community guidelines</li>
+            </ul>
+
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                📧 Termination Process
+              </div>
+              <p class="highlight-content">
+                When possible, we'll provide advance notice of termination. However, we may terminate immediately for serious violations or security concerns.
+              </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Effect of Termination</h3>
+            <ul>
+              <li>Access to your trips will be immediately revoked</li>
+              <li>Your data may be deleted according to our retention policy</li>
+              <li>These Terms will cease to apply to future use</li>
+              <li>Survival clauses (liability, intellectual property) remain in effect</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Governing Law -->
+        <section id="governing-law" class="terms-section">
+          <h2 class="section-title">11. Governing Law and Disputes</h2>
+          <div class="section-content">
+            <p><strong>Governing Law:</strong> These Terms are governed by the laws of [Your Jurisdiction], without regard to conflict of law principles.</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Dispute Resolution</h3>
+            <ol>
+              <li><strong>Direct Contact:</strong> First, contact us at support@tripplit.app to resolve issues informally</li>
+              <li><strong>Mediation:</strong> If direct contact fails, we prefer mediation over litigation</li>
+              <li><strong>Arbitration:</strong> Binding arbitration for disputes over $1,000 (where legally permitted)</li>
+              <li><strong>Small Claims Court:</strong> You may pursue small claims court for qualifying disputes</li>
+            </ol>
+
+            <div class="highlight-box info">
+              <div class="highlight-title">
+                🌍 International Users
+              </div>
+              <p class="highlight-content">
+                For users outside our primary jurisdiction, local consumer protection laws may provide additional rights that supersede these terms where applicable.
+              </p>
+            </div>
+
+            <p><strong>Class Action Waiver:</strong> You agree to resolve disputes individually and waive rights to participate in class action lawsuits (where legally permitted).</p>
+          </div>
+        </section>
+
+        <!-- Changes to Terms -->
+        <section id="changes" class="terms-section">
+          <h2 class="section-title">12. Changes to These Terms</h2>
+          <div class="section-content">
+            <p>We may update these Terms periodically to reflect service changes or legal requirements:</p>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">How We Handle Updates</h3>
+            <ul>
+              <li><strong>Notification:</strong> Changes posted on this page with updated date</li>
+              <li><strong>Major Changes:</strong> 30-day advance notice for significant modifications</li>
+              <li><strong>Email Notice:</strong> Email notification if you've provided contact information</li>
+              <li><strong>Continued Use:</strong> Using Tripplit after changes means acceptance</li>
+            </ul>
+
+            <h3 style="margin: 2rem 0 1rem 0; color: #1f2937; font-weight: 600;">Your Options</h3>
+            <ul>
+              <li><strong>Accept Changes:</strong> Continue using Tripplit normally</li>
+              <li><strong>Reject Changes:</strong> Stop using the service and export your data</li>
+              <li><strong>Contact Us:</strong> Discuss concerns about specific changes</li>
+            </ul>
+
+            <div class="highlight-box">
+              <div class="highlight-title">
+                📅 Version History
+              </div>
+              <p class="highlight-content">
+                Previous versions of these Terms are available upon request. We maintain records of all major revisions for transparency.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="contact-section" id="contact-terms">
+        <h2 class="contact-title">Questions About These Terms?</h2>
+        <p class="contact-description">
+          Our legal and support teams are here to help clarify any questions about these Terms of Service. We believe in transparency and clear communication.
+        </p>
+        <a href="/contact_us.html" class="contact-button">Contact Legal Team</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <nav class="footer-nav">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#features">Features</a>
+        <a href="/contact_us.html">Contact</a>
+        <a href="/privacy_policy.html">Privacy Policy</a>
+      </nav>
+      <p class="footer-copyright">
+        © 2025 Tripplit. All rights reserved. Made with ❤️ for better expense sharing.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for table of contents links
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Add visual highlight to the section
+          targetElement.style.background = 'rgba(59, 130, 246, 0.05)';
+          setTimeout(() => {
+            targetElement.style.background = '';
+          }, 2000);
+        }
+      });
+    });
+
+    // Add scroll spy functionality for table of contents
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('.terms-section');
+      const tocLinks = document.querySelectorAll('.toc-link');
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      tocLinks.forEach(link => {
+        link.style.fontWeight = '400';
+        link.style.color = '#3b82f6';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.fontWeight = '600';
+          link.style.color = '#1d4ed8';
+        }
+      });
+    });
+
+    // Add print styles
+    window.addEventListener('beforeprint', function() {
+      document.querySelectorAll('.highlight-box').forEach(box => {
+        box.style.breakInside = 'avoid';
+      });
+      document.querySelectorAll('.terms-section').forEach(section => {
+        section.style.breakInside = 'avoid';
+      });
+    });
+
+    // Copy section links functionality
+    document.querySelectorAll('.section-title').forEach(title => {
+      title.addEventListener('click', function() {
+        const sectionId = this.parentElement.id;
+        const url = window.location.origin + window.location.pathname + '#' + sectionId;
+        
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(() => {
+            const originalText = this.textContent;
+            this.textContent = originalText + ' (Link Copied!)';
+            setTimeout(() => {
+              this.textContent = originalText;
+            }, 2000);
+          });
+        }
+      });
+      
+      title.style.cursor = 'pointer';
+      title.title = 'Click to copy link to this section';
+    });
+  </script>
+</body>
+</html>
