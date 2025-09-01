@@ -105,6 +105,23 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    /* Header Styles for Sticky Blur Effect */
+
+@media (max-width: 600px) {
+  .header div {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem 0.5rem;
+  }
+  .logo-link span {
+    font-size: 1rem;
+  }
+  .back-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
     
     #trip-name{
       text-transform: capitalize;
@@ -724,20 +741,72 @@
         max-height: 90vh;
       }
     }
+  #share-trip-btn {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 1.5rem;
+  z-index: 1040;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(59,130,246,0.07);
+  cursor: pointer;
+  transition: background 0.16s, box-shadow 0.16s;
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+}
+#share-trip-btn:hover, #share-trip-btn:focus {
+  background: #2563eb;
+  outline: none;
+  box-shadow: 0 8px 28px rgba(59,130,246,0.11);
+}
+@media (max-width: 600px) {
+  #share-trip-btn {
+    right: 1rem;
+    left: auto;
+    bottom: 1rem;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
   </style>
 </head>
 <body>
+  <!-- Modern Responsive Header with Logo and Back to Home Only -->
+  <header class="header" style="width: 100%;">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;">
+      <a href="/" class="logo-link" style="display:flex;align-items:center;gap:1rem;text-decoration:none;">
+        <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="logo" style="height:48px;width:auto;">
+        <span style="font-size:1.35rem;font-weight:700;color:#1f2937;letter-spacing:-0.02em;"></span>
+      </a>
+      <nav>
+        <a href="/" class="back-btn" style="
+          background: #3b82f6;
+          color: white;
+          padding: 0.7rem 1.3rem;
+          border-radius: 0.6rem;
+          border: none;
+          font-weight: 600;
+          font-size: 1rem;
+          text-decoration: none;
+          transition: background 0.2s;
+          box-shadow: 0 2px 10px rgba(59,130,246,0.06);
+        ">← Back to Home</a>
+      </nav>
+    </div>
+  </header> 
   <!-- Optimized loader - removed artificial delay -->
   <div id="loader">
     <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="loader-image">
   </div>
 
-  <div class="logo-link">
-    <a href="/">
-      <img src="Images/logonobg.png" alt="Trip Expense Tracker Logo" class="logo">
-    </a>
-  </div>
-  
+
   <div class="trip-info">
     <h1><i class="fas fa-route"></i> <span id="trip-name">Trip</span></h1>
     <p id="trip-id"></p>
@@ -809,6 +878,9 @@
       <div id="dialog-buttons"></div>
     </div>
   </div>
+<button id="share-trip-btn" title="Share this trip" aria-label="Share this trip">
+  <i class="fas fa-share-alt"></i> Share Trip
+</button>
 
   <script>
     // Constants for validation
@@ -1058,6 +1130,80 @@
     window.validateAmount = validateAmount;
     window.showError = showError;
     window.clearErrors = clearErrors;
+
+    // Helper: Get Trip ID (adjust selector if needed)
+function getTripId() {
+  const tripElement = document.getElementById('trip-id');
+  let id = '';
+  if (tripElement) {
+    // Extract just the code, trimming if contents label text
+    id = tripElement.textContent ? tripElement.textContent.trim() : '';
+    // Optionally parse if format is e.g. "Trip ID: ABC123"
+    if (/[:：]\s*(\w{4,})$/.test(id)) {
+      id = id.match(/[:：]\s*(\w{4,})$/)[1];
+    }
+  }
+  return id || '[unknown]';
+}
+
+// Share logic
+document.getElementById('share-trip-btn').addEventListener('click', async function () {
+  const tripId = getTripId();
+  const shareText = `Join my Tripplit group!\nTrip code: ${tripId}\nOpen in Tripplit: https://tripplit-200.web.app/?id=${encodeURIComponent(tripId)}`;
+
+  // Native browser share (mobile, modern desktop)
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Join my Tripplit group!',
+        text: shareText,
+        url: `https://tripplit-200.web.app/?id=${encodeURIComponent(tripId)}`
+      });
+      return;
+    } catch (err) {
+      // Fallback to clipboard if sharing was cancelled/error
+    }
+  }
+
+  // Clipboard API fallback
+  try {
+    await navigator.clipboard.writeText(shareText);
+    showTemporaryShareNotification('Trip link copied to clipboard!');
+  } catch (err) {
+    showTemporaryShareNotification('Unable to copy. Please copy manually.');
+  }
+});
+
+// Temporary feedback
+function showTemporaryShareNotification(msg) {
+  let notif = document.getElementById('share-toast');
+  if (!notif) {
+    notif = document.createElement('div');
+    notif.id = 'share-toast';
+    notif.style.position = 'fixed';
+    notif.style.bottom = '5.5rem';
+    notif.style.right = '2rem';
+    notif.style.background = '#1d4ed8';
+    notif.style.color = '#fff';
+    notif.style.padding = '0.8rem 1.7rem';
+    notif.style.borderRadius = '2rem';
+    notif.style.boxShadow = '0 4px 18px rgba(59,130,246,0.13)';
+    notif.style.fontWeight = '500';
+    notif.style.zIndex = '1050';
+    notif.style.fontSize = '1rem';
+    notif.style.opacity = '0.9';
+    document.body.appendChild(notif);
+  }
+  notif.textContent = msg;
+  notif.style.display = 'block';
+  clearTimeout(notif._timer);
+  notif._timer = setTimeout(() => {
+    notif.style.display = 'none';
+  }, 2200);
+}
+
   </script>
+
+
 </body>
 </html>
