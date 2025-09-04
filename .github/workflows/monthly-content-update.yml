@@ -6,30 +6,49 @@ on:
   workflow_dispatch:     # Allow manual triggering
 
 jobs:
-  update-content:
+  update-and-deploy:
     runs-on: ubuntu-latest
     
     permissions:
       contents: write
     
     steps:
+    # 1️⃣ Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v4
       
+    # 2️⃣ Set up Python for content generation
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
         
+    # 3️⃣ Install Python dependencies
     - name: Install dependencies
       run: pip install -r requirements.txt
         
+    # 4️⃣ Generate monthly content
     - name: Generate monthly content
       env:
         GOOGLE_GENAI_API_KEY: ${{ secrets.GOOGLE_GENAI_API_KEY }}
       run: python Scripts/generate_content.py
-        
-    - name: Commit and push changes
+
+    # 5️⃣ Check Public folder (debugging)
+    - name: List Public folder contents
+      run: ls -la Public
+
+    # 6️⃣ Install Firebase CLI
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools@latest
+
+    # 7️⃣ Deploy to Firebase Hosting
+    - name: Deploy to Firebase Hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}
+      run: firebase deploy --only hosting
+
+    # 8️⃣ Commit & push changes back to repo (optional)
+    - name: Commit and push updated content
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
@@ -38,14 +57,8 @@ jobs:
           git add Public/Content/
           git commit -m "🗓️ Auto-update content for $(date +'%B %Y')"
           git push
-          echo "✅ Content updated successfully"
+          echo "✅ Content updated and pushed successfully"
         else
           echo "ℹ️ No changes to commit"
         fi
-    - name: Install Firebase CLI
-      run: npm install -g firebase-tools
-    - name: Deploy to Firebase Hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200}}
-      run: firebase deploy --only hosting
 
