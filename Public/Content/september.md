@@ -54,4 +54,4 @@ September in India heralds a magical transition as the monsoon retreats, leaving
 
 🌅 Perfect for September: Explore the UNESCO World Heritage site's temples and palaces in pleasant, post-monsoon weather without the harsh sun. Enjoy coracle rides on the river and witness stunning sunsets over the historical ruins and lush scenery.
 
-🚲 Travel Tips: Rent a bicycle or scooter to navigate the vast site and discover hidden gems at your own pace. Wear comfortable walking shoes, as much of the exploration involves walking over uneven terrain.
+🚲 Travel Tips: Rent a bicycle or scooter to navigate the vast site and discover hidden gems at your own pace. Wear comfortable walking shoes, as much of the exploration involves walking over uneven terrain. Happy Travel!
