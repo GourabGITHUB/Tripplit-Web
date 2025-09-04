@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "tripplit-200",
     "public": "Public",
     "ignore": [
       "firebase.json",
