@@ -35,7 +35,7 @@ jobs:
         git config --local user.name "github-actions[bot]"
         
         if [[ -n $(git status --porcelain) ]]; then
-          git add Content/
+          git add Public/Content/
           git commit -m "🗓️ Auto-update content for $(date +'%B %Y')"
           git push
           echo "✅ Content updated successfully"
