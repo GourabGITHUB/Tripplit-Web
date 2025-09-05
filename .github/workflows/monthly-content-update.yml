@@ -37,18 +37,17 @@ jobs:
     - name: List Public folder contents
       run: ls -la Public
 
-    # 6️⃣ Install Firebase CLI
+    #firebase setup and deploy
+    
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+         credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}'
+
     - name: Install Firebase CLI
       run: npm install -g firebase-tools@latest
 
-    # 7️⃣ Deploy to Firebase Hosting
-
-    - name: Set up Firebase
-      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}" > $HOME/firebase-key.json
-
     - name: Deploy
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: $HOME/firebase-key.json
       run: firebase deploy --only hosting --project tripplit-200 --non-interactive
 
 
