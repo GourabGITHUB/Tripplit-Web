@@ -567,10 +567,16 @@
     
     /* Styling for the custom dialog */
     #custom-dialog-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  #custom-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;  /* ⬅ this is key */
   background: rgba(26,26,46,0.8);
   z-index: 9999;
+}
+
 
 }
 #custom-dialog-overlay.hidden {
@@ -579,13 +585,16 @@
 }
 
     #custom-dialog {
-max-width: 450px;
+position: relative;       /* not absolute unless you set it */
+  max-width: 450px;
   width: 90%;
+  max-height: 80vh;         /* never taller than viewport */
+  overflow-y: auto;         /* scroll inside if content too big */
+  margin: 0 auto;           /* center horizontally */
   background: #fff;
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);  
     }
     
     @keyframes fadeInDialog {
