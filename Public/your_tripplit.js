@@ -22,6 +22,8 @@ function showCustomDialog(message, buttons) {
 
         // Show the dialog
         dialogOverlay.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+
     });
 }
 import { dbPromise } from './firebase-config.js';
