@@ -1,21 +1,3 @@
-let scrollY = 0;
-function lockScroll() {
-  scrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
-}
-function unlockScroll() {
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  window.scrollTo(0, scrollY);
-}
-
 function showCustomDialog(message, buttons) {
   return new Promise((resolve) => {
     const overlay = document.getElementById("custom-dialog-overlay");
@@ -32,24 +14,29 @@ function showCustomDialog(message, buttons) {
       b.className = cfg.className || "";
       b.addEventListener("click", () => {
         overlay.classList.add("hidden");
+        unlockScroll();
         resolve(cfg.value);
       });
       btns.appendChild(b);
     });
 
     // Show overlay
-overlay.classList.remove('hidden');
-lockScroll();
+    overlay.classList.remove('hidden');
 
-    // 👉 Place dialog at center of current viewport
-    const viewportHeight = window.innerHeight;
-    const scrollY = window.scrollY;
-    const dialogHeight = dialog.offsetHeight;
+    // Lock background scroll
+    lockScroll();
 
-    dialog.style.position = "absolute";
-    dialog.style.top = `${scrollY + (viewportHeight - dialogHeight) / 2}px`;
-    dialog.style.left = "50%";
-    dialog.style.transform = "translateX(-50%)";
+    // Ensure dialog is centered and visible
+    setTimeout(() => {
+      const rect = dialog.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      if (rect.top < 0 || rect.bottom > viewportHeight) {
+        // Auto scroll to center dialog in viewport
+        const scrollOffset = rect.top + rect.height / 2 - viewportHeight / 2;
+        window.scrollBy({ top: scrollOffset, behavior: 'smooth' });
+      }
+    }, 50); // slight delay to allow layout to update
   });
 }
 
