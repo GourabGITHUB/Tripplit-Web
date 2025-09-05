@@ -22,7 +22,7 @@ function showCustomDialog(message, buttons) {
 
         // Show the dialog
         dialogOverlay.classList.remove("hidden");
-  overlay.scrollIntoView({ behavior: "smooth", block: "center" });
+  dialogOverlay.scrollIntoView({ behavior: "smooth", block: "center" });
 
     });
 }
