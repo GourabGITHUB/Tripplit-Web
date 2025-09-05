@@ -1,32 +1,47 @@
-// Add this to your JavaScript file
+let _scrollY = 0;
+
+function lockScroll() {
+  _scrollY = window.scrollY || document.documentElement.scrollTop;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${_scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+
+function unlockScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, _scrollY);
+}
+
 function showCustomDialog(message, buttons) {
-    return new Promise((resolve) => {
-        const dialogOverlay = document.getElementById("custom-dialog-overlay");
-        const dialogMessage = document.getElementById("dialog-message");
-        const dialogButtonsContainer = document.getElementById("dialog-buttons");
+  return new Promise((resolve) => {
+    const overlay = document.getElementById('custom-dialog-overlay');
+    const msg = document.getElementById('dialog-message');
+    const btns = document.getElementById('dialog-buttons');
 
-        dialogMessage.textContent = message;
-        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+    msg.textContent = message;
+    btns.innerHTML = '';
 
-        buttons.forEach(btnConfig => {
-            const button = document.createElement("button");
-            button.textContent = btnConfig.text;
-            button.className = btnConfig.className;
-            button.addEventListener("click", () => {
-                dialogOverlay.classList.add("hidden");
-
-                // ✅ Restore scrolling
-                document.body.style.overflow = "";
-
-                resolve(btnConfig.value);
-            });
-            dialogButtonsContainer.appendChild(button);
-        });
-
-        // ✅ Show the dialog and lock scrolling
-        dialogOverlay.classList.remove("hidden");
-        document.body.style.overflow = "hidden";
+    buttons.forEach(cfg => {
+      const b = document.createElement('button');
+      b.textContent = cfg.text;
+      b.className = cfg.className || '';
+      b.addEventListener('click', () => {
+        overlay.classList.add('hidden');
+        unlockScroll();
+        resolve(cfg.value);
+      });
+      btns.appendChild(b);
     });
+
+    overlay.classList.remove('hidden');
+    lockScroll();
+  });
 }
 
 import { dbPromise } from './firebase-config.js';
