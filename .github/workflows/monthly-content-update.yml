@@ -44,12 +44,12 @@ jobs:
     # 7️⃣ Deploy to Firebase Hosting
 
     - name: Set up Firebase
-      run: echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}' > $HOME/firebase-key.json
+      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}" > $HOME/firebase-key.json
 
     - name: Deploy
       env:
         GOOGLE_APPLICATION_CREDENTIALS: $HOME/firebase-key.json
-      run: firebase deploy --only hosting --project tripplit-200
+      run: firebase deploy --only hosting --project tripplit-200 --non-interactive
 
 
     # 8️⃣ Commit & push changes back to repo (optional)
