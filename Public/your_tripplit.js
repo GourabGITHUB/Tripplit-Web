@@ -22,8 +22,18 @@ function showCustomDialog(message, buttons) {
 
         // Show the dialog
         dialogOverlay.classList.remove("hidden");
-  dialogOverlay.scrollIntoView({ behavior: "smooth", block: "center" });
-
+ // Check if dialog is in viewport before scrolling
+        const dialogRect = dialogOverlay.getBoundingClientRect();
+        const isInViewport = (
+            dialogRect.top >= 0 &&
+            dialogRect.left >= 0 &&
+            dialogRect.bottom <= window.innerHeight &&
+            dialogRect.right <= window.innerWidth
+        );
+        
+        if (!isInViewport) {
+            dialogOverlay.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
     });
 }
 import { dbPromise } from './firebase-config.js';
