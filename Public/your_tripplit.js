@@ -1,45 +1,31 @@
+// Add this to your JavaScript file
 function showCustomDialog(message, buttons) {
-  return new Promise((resolve) => {
-    const overlay = document.getElementById("custom-dialog-overlay");
-    const dialog = document.getElementById("custom-dialog");
-    const msg = document.getElementById("dialog-message");
-    const btns = document.getElementById("dialog-buttons");
+    return new Promise((resolve) => {
+        const dialogOverlay = document.getElementById("custom-dialog-overlay");
+        const dialogMessage = document.getElementById("dialog-message");
+        const dialogButtonsContainer = document.getElementById("dialog-buttons");
 
-    msg.textContent = message;
-    btns.innerHTML = "";
 
-    buttons.forEach(cfg => {
-      const b = document.createElement("button");
-      b.textContent = cfg.text;
-      b.className = cfg.className || "";
-      b.addEventListener("click", () => {
-        overlay.classList.add("hidden");
-        unlockScroll();
-        resolve(cfg.value);
-      });
-      btns.appendChild(b);
+        dialogMessage.textContent = message;
+        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
+
+        buttons.forEach(btnConfig => {
+            const button = document.createElement("button");
+            button.textContent = btnConfig.text;
+            button.className = btnConfig.className;
+            button.addEventListener("click", () => {
+                dialogOverlay.classList.add("hidden");
+                resolve(btnConfig.value);
+            });
+            dialogButtonsContainer.appendChild(button);
+        });
+
+        // Show the dialog
+        dialogOverlay.classList.remove("hidden");
+  overlay.scrollIntoView({ behavior: "smooth", block: "center" });
+
     });
-
-    // Show overlay
-    overlay.classList.remove('hidden');
-
-    // Lock background scroll
-    lockScroll();
-
-    // Ensure dialog is centered and visible
-    setTimeout(() => {
-      const rect = dialog.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      if (rect.top < 0 || rect.bottom > viewportHeight) {
-        // Auto scroll to center dialog in viewport
-        const scrollOffset = rect.top + rect.height / 2 - viewportHeight / 2;
-        window.scrollBy({ top: scrollOffset, behavior: 'smooth' });
-      }
-    }, 50); // slight delay to allow layout to update
-  });
 }
-
 import { dbPromise } from './firebase-config.js';
 import {
     doc,
