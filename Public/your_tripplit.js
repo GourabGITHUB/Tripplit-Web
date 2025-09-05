@@ -5,7 +5,6 @@ function showCustomDialog(message, buttons) {
         const dialogMessage = document.getElementById("dialog-message");
         const dialogButtonsContainer = document.getElementById("dialog-buttons");
 
-
         dialogMessage.textContent = message;
         dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
 
@@ -15,17 +14,21 @@ function showCustomDialog(message, buttons) {
             button.className = btnConfig.className;
             button.addEventListener("click", () => {
                 dialogOverlay.classList.add("hidden");
+
+                // ✅ Restore scrolling
+                document.body.style.overflow = "";
+
                 resolve(btnConfig.value);
             });
             dialogButtonsContainer.appendChild(button);
         });
 
-        // Show the dialog
+        // ✅ Show the dialog and lock scrolling
         dialogOverlay.classList.remove("hidden");
-          document.body.style.overflow = "hidden";
-
+        document.body.style.overflow = "hidden";
     });
 }
+
 import { dbPromise } from './firebase-config.js';
 import {
     doc,
