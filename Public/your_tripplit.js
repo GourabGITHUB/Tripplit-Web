@@ -1,14 +1,12 @@
-// Add this to your JavaScript file
 function showCustomDialog(message, buttons) {
     return new Promise((resolve) => {
         const dialogOverlay = document.getElementById("custom-dialog-overlay");
         const dialogMessage = document.getElementById("dialog-message");
         const dialogButtonsContainer = document.getElementById("dialog-buttons");
-
-
+        
         dialogMessage.textContent = message;
-        dialogButtonsContainer.innerHTML = ''; // Clear previous buttons
-
+        dialogButtonsContainer.innerHTML = '';
+        
         buttons.forEach(btnConfig => {
             const button = document.createElement("button");
             button.textContent = btnConfig.text;
@@ -19,23 +17,27 @@ function showCustomDialog(message, buttons) {
             });
             dialogButtonsContainer.appendChild(button);
         });
-
+        
         // Show the dialog
         dialogOverlay.classList.remove("hidden");
- // Check if dialog is in viewport before scrolling
-        const dialogRect = dialogOverlay.getBoundingClientRect();
-        const isInViewport = (
-            dialogRect.top >= 0 &&
-            dialogRect.left >= 0 &&
-            dialogRect.bottom <= window.innerHeight &&
-            dialogRect.right <= window.innerWidth
-        );
         
-        if (!isInViewport) {
-            dialogOverlay.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+        // Wait for DOM update, then scroll
+        requestAnimationFrame(() => {
+            dialogOverlay.scrollIntoView({ 
+                behavior: "smooth", 
+                block: "center",
+                inline: "center"
+            });
+            
+            // Focus first button for accessibility
+            const firstButton = dialogButtonsContainer.querySelector("button");
+            if (firstButton) {
+                firstButton.focus();
+            }
+        });
     });
 }
+
 import { dbPromise } from './firebase-config.js';
 import {
     doc,
