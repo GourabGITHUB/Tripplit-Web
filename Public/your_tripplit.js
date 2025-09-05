@@ -1,46 +1,36 @@
-let _scrollY = 0;
-
-function lockScroll() {
-  _scrollY = window.scrollY || document.documentElement.scrollTop;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${_scrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
-}
-
-function unlockScroll() {
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  window.scrollTo(0, _scrollY);
-}
-
 function showCustomDialog(message, buttons) {
   return new Promise((resolve) => {
-    const overlay = document.getElementById('custom-dialog-overlay');
-    const msg = document.getElementById('dialog-message');
-    const btns = document.getElementById('dialog-buttons');
+    const overlay = document.getElementById("custom-dialog-overlay");
+    const dialog = document.getElementById("custom-dialog");
+    const msg = document.getElementById("dialog-message");
+    const btns = document.getElementById("dialog-buttons");
 
     msg.textContent = message;
-    btns.innerHTML = '';
+    btns.innerHTML = "";
 
     buttons.forEach(cfg => {
-      const b = document.createElement('button');
+      const b = document.createElement("button");
       b.textContent = cfg.text;
-      b.className = cfg.className || '';
-      b.addEventListener('click', () => {
-        overlay.classList.add('hidden');
-        unlockScroll();
+      b.className = cfg.className || "";
+      b.addEventListener("click", () => {
+        overlay.classList.add("hidden");
         resolve(cfg.value);
       });
       btns.appendChild(b);
     });
 
-    overlay.classList.remove('hidden');
-    lockScroll();
+    // Show overlay
+    overlay.classList.remove("hidden");
+
+    // 👉 Place dialog at center of current viewport
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const dialogHeight = dialog.offsetHeight;
+
+    dialog.style.position = "absolute";
+    dialog.style.top = `${scrollY + (viewportHeight - dialogHeight) / 2}px`;
+    dialog.style.left = "50%";
+    dialog.style.transform = "translateX(-50%)";
   });
 }
 
