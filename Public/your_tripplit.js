@@ -1,3 +1,21 @@
+let scrollY = 0;
+function lockScroll() {
+  scrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+function unlockScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, scrollY);
+}
+
 function showCustomDialog(message, buttons) {
   return new Promise((resolve) => {
     const overlay = document.getElementById("custom-dialog-overlay");
@@ -20,7 +38,8 @@ function showCustomDialog(message, buttons) {
     });
 
     // Show overlay
-    overlay.classList.remove("hidden");
+overlay.classList.remove('hidden');
+lockScroll();
 
     // 👉 Place dialog at center of current viewport
     const viewportHeight = window.innerHeight;
