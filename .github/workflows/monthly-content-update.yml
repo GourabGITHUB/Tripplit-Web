@@ -45,7 +45,7 @@ jobs:
     - name: Deploy to Firebase Hosting
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TRIPPLIT_200 }}
-      run: firebase deploy --only hosting
+      run: firebase deploy --only hosting --project tripplit-200
 
     # 8️⃣ Commit & push changes back to repo (optional)
     - name: Commit and push updated content
