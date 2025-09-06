@@ -1,41 +1,40 @@
-function showCustomDialog(message, buttons) {
-    return new Promise((resolve) => {
+unction showCustomDialog(message, buttons, autoDismissMs = null) {
+      return new Promise((resolve) => {
         const dialogOverlay = document.getElementById("custom-dialog-overlay");
         const dialogMessage = document.getElementById("dialog-message");
         const dialogButtonsContainer = document.getElementById("dialog-buttons");
+        const errorDiv = document.getElementById("dialog-error");
         
         dialogMessage.textContent = message;
         dialogButtonsContainer.innerHTML = '';
+        errorDiv.classList.add('hidden');
+        
+        let resolved = false;
         
         buttons.forEach(btnConfig => {
-            const button = document.createElement("button");
-            button.textContent = btnConfig.text;
-            button.className = btnConfig.className;
-            button.addEventListener("click", () => {
-                dialogOverlay.classList.add("hidden");
-                resolve(btnConfig.value);
-            });
-            dialogButtonsContainer.appendChild(button);
+          const button = document.createElement("button");
+          button.textContent = btnConfig.text;
+          button.className = btnConfig.className;
+          button.addEventListener("click", () => {
+            dialogOverlay.classList.add("hidden");
+            resolved = true;
+            resolve(btnConfig.value);
+          });
+          dialogButtonsContainer.appendChild(button);
         });
         
-        // Show the dialog first
         dialogOverlay.classList.remove("hidden");
         
-        // Smooth scroll to top to ensure dialog is visible
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-        // Focus first button for accessibility (with slight delay for scroll)
-        setTimeout(() => {
-            const firstButton = dialogButtonsContainer.querySelector("button");
-            if (firstButton) {
-                firstButton.focus();
-            }
-        }, 300);
-    });
-}
+        if (autoDismissMs !== null && buttons.length === 0) {
+          setTimeout(() => {
+            if (resolved) return;
+            resolved = true;
+            dialogOverlay.classList.add("hidden");
+            resolve(true);
+          }, autoDismissMs);
+        }
+      });
+    }
 
 import { dbPromise } from './firebase-config.js';
 import {
