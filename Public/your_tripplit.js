@@ -18,23 +18,22 @@ function showCustomDialog(message, buttons) {
             dialogButtonsContainer.appendChild(button);
         });
         
-        // Show the dialog
+        // Show the dialog first
         dialogOverlay.classList.remove("hidden");
         
-        // Wait for DOM update, then scroll
-        requestAnimationFrame(() => {
-            dialogOverlay.scrollIntoView({ 
-                behavior: "smooth", 
-                block: "center",
-                inline: "center"
-            });
-            
-            // Focus first button for accessibility
+        // Smooth scroll to top to ensure dialog is visible
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Focus first button for accessibility (with slight delay for scroll)
+        setTimeout(() => {
             const firstButton = dialogButtonsContainer.querySelector("button");
             if (firstButton) {
                 firstButton.focus();
             }
-        });
+        }, 300);
     });
 }
 
