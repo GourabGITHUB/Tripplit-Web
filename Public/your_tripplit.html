@@ -567,53 +567,56 @@
     }
     
     /* Styling for the custom dialog */
-    #custom-dialog-overlay {
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-      transform: translate(-50%, -50%);
-
-  background-color: rgba(26, 26, 46, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;   /* ⬅ center vertically instead of top */
-  z-index: 1000;
-  transition: opacity 0.3s ease-in-out;
-  padding: 1rem;         /* optional padding for small screens */
-  box-sizing: border-box;
-  overflow-y: auto;      /* keep just in case of very tall content */
+  #custom-dialog-overlay {
+    position: fixed;
+    top: 0;  /* Changed from 50% */
+    left: 0; /* Changed from 50% */
+    width: 100vw;  /* Use viewport units */
+    height: 100vh; /* Use viewport units */
+    transform: none; /* Remove transform */
+    background-color: rgba(26, 26, 46, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* Much higher than share button */
+    transition: opacity 0.3s ease-in-out;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+    backdrop-filter: blur(2px); /* Optional: adds modern blur effect */
 }
 
 #custom-dialog {
-  background-color: #ffffff;
-  padding: 2.5rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  max-width: 450px;
-  width: 90%;
-  text-align: center;
-  animation: fadeInDialog 0.3s ease-in-out;
-  max-height: 80vh;
-  overflow-y: auto;
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    animation: slideInDialog 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative; /* Ensure it's positioned correctly */
 }
 
-    #custom-dialog-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    @keyframes fadeInDialog {
-      from {
+#custom-dialog-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden; /* Add this for better hiding */
+}
+
+@keyframes slideInDialog {
+    from {
         opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-      }
-      to {
+        transform: translateY(-30px) scale(0.9);
+    }
+    to {
         opacity: 1;
         transform: translateY(0) scale(1);
-      }
     }
+}
+  
     
     #dialog-message {
       font-size: 1.2rem;

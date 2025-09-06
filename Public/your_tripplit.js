@@ -1,40 +1,52 @@
-unction showCustomDialog(message, buttons, autoDismissMs = null) {
-      return new Promise((resolve) => {
+function showCustomDialog(message, buttons) {
+    return new Promise((resolve) => {
         const dialogOverlay = document.getElementById("custom-dialog-overlay");
         const dialogMessage = document.getElementById("dialog-message");
         const dialogButtonsContainer = document.getElementById("dialog-buttons");
-        const errorDiv = document.getElementById("dialog-error");
+        
+        // Store current scroll position
+        const savedScrollY = window.scrollY;
         
         dialogMessage.textContent = message;
         dialogButtonsContainer.innerHTML = '';
-        errorDiv.classList.add('hidden');
-        
-        let resolved = false;
         
         buttons.forEach(btnConfig => {
-          const button = document.createElement("button");
-          button.textContent = btnConfig.text;
-          button.className = btnConfig.className;
-          button.addEventListener("click", () => {
-            dialogOverlay.classList.add("hidden");
-            resolved = true;
-            resolve(btnConfig.value);
-          });
-          dialogButtonsContainer.appendChild(button);
+            const button = document.createElement("button");
+            button.textContent = btnConfig.text;
+            button.className = btnConfig.className;
+            button.addEventListener("click", () => {
+                dialogOverlay.classList.add("hidden");
+                
+                // Restore scroll position and body scroll
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, savedScrollY);
+                
+                resolve(btnConfig.value);
+            });
+            dialogButtonsContainer.appendChild(button);
         });
         
+        // Lock body scroll at current position
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollY}px`;
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        
+        // Show the dialog
         dialogOverlay.classList.remove("hidden");
         
-        if (autoDismissMs !== null && buttons.length === 0) {
-          setTimeout(() => {
-            if (resolved) return;
-            resolved = true;
-            dialogOverlay.classList.add("hidden");
-            resolve(true);
-          }, autoDismissMs);
-        }
-      });
-    }
+        // Ensure immediate focus
+        requestAnimationFrame(() => {
+            const firstButton = dialogButtonsContainer.querySelector("button");
+            if (firstButton) {
+                firstButton.focus();
+            }
+        });
+    });
+}
 
 import { dbPromise } from './firebase-config.js';
 import {
