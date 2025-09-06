@@ -13,52 +13,29 @@ function showCustomDialog(message, buttons) {
             button.className = btnConfig.className;
             button.addEventListener("click", () => {
                 dialogOverlay.classList.add("hidden");
-                // Re-enable body scroll
-                document.body.style.overflow = '';
-                document.body.style.position = '';
                 resolve(btnConfig.value);
             });
             dialogButtonsContainer.appendChild(button);
         });
         
-        // Prevent body scroll to lock the background
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.width = '100%';
-        
         // Show the dialog
         dialogOverlay.classList.remove("hidden");
         
-        // Force immediate visibility and focus
+        // Wait for DOM update, then scroll
         requestAnimationFrame(() => {
-            // Ensure dialog is visible
-            dialogOverlay.style.display = 'flex';
+            dialogOverlay.scrollIntoView({ 
+                behavior: "smooth", 
+                block: "center",
+                inline: "center"
+            });
             
             // Focus first button for accessibility
             const firstButton = dialogButtonsContainer.querySelector("button");
             if (firstButton) {
-                setTimeout(() => firstButton.focus(), 100);
+                firstButton.focus();
             }
         });
     });
-}
-
-// Add this helper function to your code
-function preventBodyScroll() {
-    const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-    return scrollY;
-}
-
-function restoreBodyScroll(scrollY) {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    window.scrollTo(0, scrollY);
 }
 
 import { dbPromise } from './firebase-config.js';
