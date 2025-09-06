@@ -569,9 +569,10 @@
     /* Styling for the custom dialog */
     #custom-dialog-overlay {
       position: fixed;
-      top: 0;
-      left: 50%;
-      max-width: 90%;
+      top:-100px; /* hidden by default */
+      left:50%;
+      width: 100%;
+      height: 100%;
       background-color: rgba(26, 26, 46, 0.8);
       display: flex;
       justify-content: center;
@@ -777,12 +778,6 @@
   </style>
 </head>
 <body>
-  <div id="custom-dialog-overlay" class="hidden">
-    <div id="custom-dialog">
-      <p id="dialog-message"></p>
-      <div id="dialog-buttons"></div>
-    </div>
-  </div>
   <!-- Modern Responsive Header with Logo and Back to Home Only -->
   <header class="header" style="width: 100%;">
     <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1rem;">
@@ -877,7 +872,12 @@
     </div>
   </div>
 
-  
+  <div id="custom-dialog-overlay" class="hidden">
+    <div id="custom-dialog">
+      <p id="dialog-message"></p>
+      <div id="dialog-buttons"></div>
+    </div>
+  </div>
 <button id="share-trip-btn" title="Share this trip" aria-label="Share this trip">
   <i class="fas fa-share-alt"></i> Share Trip
 </button>
